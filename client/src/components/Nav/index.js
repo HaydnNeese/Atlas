@@ -11,12 +11,12 @@ const Nav = () => (
         />
       </Menu.Item>
 
-      <Menu.Menu position="right" href="/">
-        <Menu.Item as="a" name="login">
+      <Menu.Menu position="right">
+        <Menu.Item as="a" name="login" href="/">
           Login
         </Menu.Item>
 
-        <Menu.Item as="a" name="sign-up">
+        <Menu.Item as="a" name="sign-up" href="/signup">
           Sign Up
         </Menu.Item>
       </Menu.Menu>
