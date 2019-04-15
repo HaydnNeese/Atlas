@@ -1,20 +1,29 @@
 import React from 'react'
-import { Grid, GridColumn, Header, Button } from 'semantic-ui-react'
+import titleLogo from '../images/atlas-black-logo.png';
+import { Grid, GridColumn, Image, Container } from 'semantic-ui-react'
 import PassCard from '../components/Card';
+import AddModal from '../components/AddModal';
+
+const divStyle = {
+    paddingTop: '90px',
+};
 
 function Home() {
     return (
-      <Grid textAlign='center'>
+    <Container>
+      <Grid stackable style={divStyle} textAlign='center'>
         <Grid.Row>
           <Grid.Column>
-            <Header as="h1">
-              Atlas
-            </Header>
+            <Image
+              centered
+              size="medium"
+              src={titleLogo}
+            />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <Button content='Add New' icon='plus' color="blue" labelPosition='left' />
+            <AddModal />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row stackable columns={3}>
@@ -29,6 +38,8 @@ function Home() {
           </GridColumn>
         </Grid.Row>
       </Grid>
+    </Container>
+      
     );
 }
 

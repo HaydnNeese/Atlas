@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import titleLogo from '../images/atlas-black-logo.png';
 import {
     Button,
     Form,
     Grid,
-    Header,
+    Image,
     Message,
     Segment,
     Container,
 } from 'semantic-ui-react';
+
+const divStyle = {
+    paddingTop: '90px',
+};
 
 class Login extends Component {
     state = {
@@ -16,21 +21,24 @@ class Login extends Component {
 
     render() {
         return (
-            <Container>
-                <Grid centered columns={2}>
+            <Container style={divStyle}>
+                <Grid doubling centered columns={2}>
                     <Grid.Column>
-                        <Header as="h1" textAlign="center">
-                            Atlas
-                    </Header>
+                        <Image
+                            centered
+                            size="medium"
+                            src={titleLogo}
+                        />
                         <Segment>
                             <Form size="large">
-                                <Form.Input
+                                <Form.Input required
                                     fluid
                                     icon="user"
                                     iconPosition="left"
                                     placeholder="Email address"
+                                    type="email"
                                 />
-                                <Form.Input
+                                <Form.Input required
                                     fluid
                                     icon="lock"
                                     iconPosition="left"

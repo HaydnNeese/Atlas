@@ -1,22 +1,24 @@
 import React from 'react';
 import { Container, Image, Menu } from 'semantic-ui-react';
+import logo from '../../images/atlas-white-logo.png';
+import './style.css';
 
 const Nav = () => (
-  <Menu>
+  <Menu id="navbar">
     <Container>
       <Menu.Item as="a" header href="/home">
         <Image
           size="small"
-          src="https://via.placeholder.com/150x50"
+          src={logo}
         />
       </Menu.Item>
 
       <Menu.Menu position="right">
-        <Menu.Item as="a" name="login" href="/">
+        <Menu.Item as="a" name="login" href="/" id="nav-link-login">
           Login
         </Menu.Item>
 
-        <Menu.Item as="a" name="sign-up" href="/signup">
+        <Menu.Item as="a" name="sign-up" href="/signup" id="nav-link-signup">
           Sign Up
         </Menu.Item>
       </Menu.Menu>
