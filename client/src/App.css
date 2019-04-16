@@ -3,6 +3,8 @@
   background: linear-gradient(305deg, #9FD8CB, #9FD8CB, #B2FFD6, #F8FFAE, #FFF697, #DDFC74, #B2EC5D);
   background-size: 600% 600%;
   animation: Animate3 60s ease infinite;
+  flex: 1 0 auto;
+  padding-bottom: 20px;
 }
 
 @keyframes Animate3 { 
