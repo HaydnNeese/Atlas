@@ -1,20 +1,4 @@
 
-/* .content-div {
-  background: #43C6AC;
-  background: -webkit-linear-gradient(to left, #F8FFAE, #43C6AC); 
-  background: linear-gradient(to left, #F8FFAE, #43C6AC);
-  /* height: 90vh; 
-  flex: 1 0 auto;
-  padding-bottom: 50px;
-} */
-
-/* .content-div {
-  background: #2BC0E4;
-  background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);
-  background: linear-gradient(to right, #EAECC6, #2BC0E4); 
-  
-} */
-
 .content-div {
   background: linear-gradient(305deg, #9FD8CB, #9FD8CB, #B2FFD6, #F8FFAE, #FFF697, #DDFC74, #B2EC5D);
   background-size: 600% 600%;
@@ -26,15 +10,3 @@
   50%{background-position:100% 60%}
   100%{background-position:0% 41%}
 }
-
-/* @-webkit-keyframes Animate1 {
-    0%{background-position:0% 41%}
-    50%{background-position:100% 60%}
-    100%{background-position:0% 41%}
-}
-@-moz-keyframes Animate2 {
-    0%{background-position:0% 41%}
-    50%{background-position:100% 60%}
-    100%{background-position:0% 41%}
-} */
-
