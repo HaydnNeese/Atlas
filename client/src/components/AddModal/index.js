@@ -15,7 +15,7 @@ const AddModal = () => (
                             fluid
                             icon="globe"
                             iconPosition="left"
-                            placeholder="e.g. Gmail, Instagram, Steam..."
+                            placeholder="Gmail, Instagram, Steam..."
                             type="text"
                         />
                     </Form.Field>
@@ -25,7 +25,7 @@ const AddModal = () => (
                             fluid
                             icon="user"
                             iconPosition="left"
-                            placeholder="e.g. Gmail address/Steam username..."
+                            placeholder="name@email.com/username10..."
                             type="text"
                         />
                     </Form.Field>
