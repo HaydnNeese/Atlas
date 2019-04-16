@@ -1,0 +1,5 @@
+#footer {
+    background-image: linear-gradient(rgb(30, 31, 46), #2B2D42, rgb(66, 69, 100));
+    flex: none;
+    flex-shrink: none;
+}
