@@ -15,7 +15,7 @@ const AddModal = () => (
                             fluid
                             icon="globe"
                             iconPosition="left"
-                            placeholder="e.g. Gmail, Instagram, Steam..."
+                            placeholder="Gmail, Instagram, Steam..."
                             type="text"
                         />
                     </Form.Field>
@@ -25,7 +25,7 @@ const AddModal = () => (
                             fluid
                             icon="user"
                             iconPosition="left"
-                            placeholder="e.g. Gmail address/Steam username..."
+                            placeholder="name@email.com/username10..."
                             type="text"
                         />
                     </Form.Field>
@@ -39,11 +39,13 @@ const AddModal = () => (
                             type="password"
                         />
                     </Form.Field>
-                    <Button.Group id="modalBtn" floated='right'>
-                        <Button negative>Cancel</Button>
-                        <Button.Or />
-                        <Button color="blue" type="submit">Add</Button>
-                    </Button.Group>
+                    <Modal.Actions>
+                        <Button.Group id="modalBtn" floated='right'>
+                            <Button negative>Cancel</Button>
+                            <Button.Or />
+                            <Button color="blue" type="submit">Add</Button>
+                        </Button.Group>
+                    </Modal.Actions>
                 </Form>
             </Modal.Description>
         </Modal.Content>

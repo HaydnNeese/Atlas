@@ -6,10 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
   min-height: 100vh;
   min-width: 100%;
-  flex-direction: column;
   background: #43C6AC;
   background: -webkit-linear-gradient(to left, #F8FFAE, #43C6AC); 
   background: linear-gradient(to left, #F8FFAE, #43C6AC);
