@@ -7,38 +7,19 @@ const AddModal = () => (
         <Modal.Header></Modal.Header>
         <Modal.Content>
             <Modal.Description>
-                <Header>Add a new login card</Header>
+                <Header>Add a new note</Header>
                 <Form>
                     <Form.Field required>
-                        <label>Website/App</label>
+                        <label>Title of Note</label>
                         <Form.Input required
                             fluid
-                            icon="globe"
-                            iconPosition="left"
-                            placeholder="Gmail, Instagram, Steam..."
+                            placeholder="Secret Note/Password Hints..."
                             type="text"
                         />
                     </Form.Field>
-                    <Form.Field required>
-                        <label>Account Username</label>
-                        <Form.Input required
-                            fluid
-                            icon="user"
-                            iconPosition="left"
-                            placeholder="name@email.com/username10..."
-                            type="text"
-                        />
-                    </Form.Field>
-                    <Form.Field required>
-                        <label>Account Password</label>
-                        <Form.Input required
-                            fluid
-                            icon="lock"
-                            iconPosition="left"
-                            placeholder="Password"
-                            type="password"
-                        />
-                    </Form.Field>
+                    <Form.TextArea required
+                        label='Note Content'
+                        placeholder='Keep your secrets here...' />
                     <Modal.Actions>
                         <Button.Group id="modalBtn" floated='right'>
                             <Button negative>Cancel</Button>
