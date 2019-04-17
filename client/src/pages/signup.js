@@ -25,7 +25,7 @@ const options = [
 
 class Signup extends Component {
     state = {
-        stuff: "",
+        
     };
 
     render() {

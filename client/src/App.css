@@ -4,7 +4,7 @@
   background-size: 600% 600%;
   animation: Animate3 60s ease infinite;
   flex: 1 0 auto;
-  padding-bottom: 20px;
+  padding-bottom: 80px;
 }
 
 @keyframes Animate3 { 

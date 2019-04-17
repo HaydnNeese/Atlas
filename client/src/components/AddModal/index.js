@@ -39,11 +39,13 @@ const AddModal = () => (
                             type="password"
                         />
                     </Form.Field>
-                    <Button.Group id="modalBtn" floated='right'>
-                        <Button negative>Cancel</Button>
-                        <Button.Or />
-                        <Button color="blue" type="submit">Add</Button>
-                    </Button.Group>
+                    <Modal.Actions>
+                        <Button.Group id="modalBtn" floated='right'>
+                            <Button negative>Cancel</Button>
+                            <Button.Or />
+                            <Button color="blue" type="submit">Add</Button>
+                        </Button.Group>
+                    </Modal.Actions>
                 </Form>
             </Modal.Description>
         </Modal.Content>
