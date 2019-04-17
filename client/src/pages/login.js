@@ -16,8 +16,9 @@ const divStyle = {
 
 class Login extends Component {
     state = {
-        stuff: "",
-    };
+        stuff: ""
+    }    
+
 
     render() {
         return (
