@@ -7,7 +7,14 @@ var UserSchema = new Schema({
     email: String,
     phone: String,
     question: String,
-    answer: String
+    answer: String,
+        
+    modal: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Modal"
+        }
+    ]
 });
 
 module.exports = {
