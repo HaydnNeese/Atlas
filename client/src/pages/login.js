@@ -9,6 +9,9 @@ import {
     Segment,
     Container,
 } from 'semantic-ui-react';
+import axios from 'axios';
+
+//var md5 = require('md5');
 
 const divStyle = {
     paddingTop: '90px',
@@ -16,9 +19,33 @@ const divStyle = {
 
 class Login extends Component {
     state = {
-        stuff: ""
+        email: "",
+        password: "",
+        loggedIn: false
     }    
 
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    handleLogin = async (e) => {
+        e.preventDefault();
+        console.log('you pressed the login btn');
+
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password
+                })
+            });
+
+            console.log("response from the FRONT END", response); 
+        
+    }
 
     render() {
         return (
@@ -37,6 +64,9 @@ class Login extends Component {
                                     icon="user"
                                     iconPosition="left"
                                     placeholder="Email address"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.handleChange}
                                     type="email"
                                 />
                                 <Form.Input required
@@ -44,12 +74,15 @@ class Login extends Component {
                                     icon="lock"
                                     iconPosition="left"
                                     placeholder="Password"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.handleChange}
                                     type="password"
                                 />
 
-                                <Button type="submit" color="blue" fluid size="large">
+                                <Button type="submit" color="blue" fluid size="large" onClick={this.handleLogin}>
                                     Login
-                            </Button>
+                                </Button>
                             </Form>
                         </Segment>
                         <Message>
