@@ -8,8 +8,12 @@ import {
     Message,
     Segment,
     Container,
+    Accordion,
 } from 'semantic-ui-react';
+import Home from './home';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+const token = localStorage.token;
 
 //var md5 = require('md5');
 
@@ -35,16 +39,28 @@ class Login extends Component {
             const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }, 
                 body: JSON.stringify({
                     email: this.state.email,
                     password: this.state.password
                 })
+                
             });
-
-            console.log("response from the FRONT END", response); 
-        
+    
+            let backEndRes = await response.json();
+            console.log("Back End Response", backEndRes);
+            localStorage.setItem("token", backEndRes.token);
+            // if (!backEndRes) {
+            //     alert("That email does not exits. If you don't have an Accordion, sign up!");
+            // }else{
+            //     return(
+            //         <Route exact path='/home' component={Home} />
+            //     )
+            // }
+            
+             
     }
 
     render() {
