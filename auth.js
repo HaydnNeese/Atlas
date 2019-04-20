@@ -25,6 +25,7 @@ module.exports = function(app){
                 }
             )
         } else {
+           console.log('********your token is expired');
            next()
         }
     })
@@ -57,7 +58,8 @@ module.exports = function(app){
     var reqEmail = req.body.email;                               //  set the username the email the user types in
     let currentUser = await User.find({ email: reqEmail });      //  only bring back that email
     if (currentUser.length == 0) {                               // check the database for the email entered
-      console.log("That email does not exist. If you don't have an account, sign up!");
+      //console.log("That email does not exist. If you don't have an account, sign up!");
+      res.json({message: 'none'});
     }else{
       //console.log('this is current user: ', currentUser[0]);
       var dbPassword = currentUser[0].password;
@@ -66,7 +68,7 @@ module.exports = function(app){
       //console.log('New Password: ', newPW)
 
       if (checkPW(newPW, dbPassword)){
-        const token=jwt.sign({expires: moment().add(20, 'm'), userId:currentUser[0]._id}, "thisisaTOKENKEY");
+        const token=jwt.sign({expires: moment().add(5, 'm'), userId:currentUser[0]._id}, "thisisaTOKENKEY");
 
                     return res.status(200).json({
                         userId: currentUser[0]._id,

@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react';
 import Home from './home';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 const token = localStorage.token;
 
 //var md5 = require('md5');
@@ -52,18 +52,29 @@ class Login extends Component {
             let backEndRes = await response.json();
             console.log("Back End Response", backEndRes);
             localStorage.setItem("token", backEndRes.token);
-            // if (!backEndRes) {
-            //     alert("That email does not exits. If you don't have an Accordion, sign up!");
-            // }else{
-            //     return(
-            //         <Route exact path='/home' component={Home} />
-            //     )
-            // }
+            if (backEndRes.message === "none") {
+                alert("That email does not exist. If you don't have an Account, sign up!");
+            }else{
+                console.log("set to redirect HERE+++++++")
+                this.setState({loggedIn: true});
+            }
             
              
     }
 
     render() {
+        if (this.state.loggedIn) {
+            return(
+                <Redirect
+                    to={{
+                    pathname: "/home",
+                    //can pass more data here
+                    }}
+                />
+            )
+        }
+        
+
         return (
             <Container style={divStyle}>
                 <Grid doubling centered columns={2}>
