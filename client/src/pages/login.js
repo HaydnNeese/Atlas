@@ -56,7 +56,7 @@ class Login extends Component {
                 alert("That email does not exist. If you don't have an Account, sign up!");
             
             }
-            if (backEndRes.message === "Invalid Password/Username") {
+            else if (backEndRes.message === "Invalid Password/Username") {
                 alert("Invalid email/password");
             }
             else{
