@@ -54,7 +54,12 @@ class Login extends Component {
             localStorage.setItem("token", backEndRes.token);
             if (backEndRes.message === "none") {
                 alert("That email does not exist. If you don't have an Account, sign up!");
-            }else{
+            
+            }
+            if (backEndRes.message === "Invalid Password/Username") {
+                alert("Invalid email/password");
+            }
+            else{
                 console.log("set to redirect HERE+++++++")
                 this.setState({loggedIn: true});
             }
