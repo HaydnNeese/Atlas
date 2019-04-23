@@ -8,8 +8,9 @@ import {
     Message,
     Segment,
     Container,
-    Accordion,
+    Header,
 } from 'semantic-ui-react';
+import Steps from '../components/Steps';
 import Home from './home';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
@@ -89,6 +90,9 @@ class Login extends Component {
                             size="medium"
                             src={titleLogo}
                         />
+                        <Header as="h2" textAlign="center">
+                            Login for secure information storage.
+                        </Header>
                         <Segment>
                             <Form size="large">
                                 <Form.Input required
@@ -121,6 +125,7 @@ class Login extends Component {
                             Not registered yet? <a href="/signup">Sign Up</a>
                         </Message>
                     </Grid.Column>
+                    <Steps />
                 </Grid>
             </Container>
         )
