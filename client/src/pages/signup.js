@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import titleLogo from '../images/atlas-black-logo.png';
+import Steps from '../components/Steps';
 import {
     Button,
     Form,
@@ -73,7 +74,7 @@ class Signup extends Component {
                             src={titleLogo}
                         />
                         <Header as="h2" textAlign="center">
-                            Enter your signup details
+                            Signup for secure information storage.
                         </Header>
                         <Segment>
                             <Form size="large">
@@ -153,6 +154,7 @@ class Signup extends Component {
                             Already have an account? <a href="/">Login</a>
                         </Message>
                     </Grid.Column>
+                    <Steps />
                 </Grid>
             </Container>
         )
