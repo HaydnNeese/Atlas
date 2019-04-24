@@ -12,10 +12,15 @@ const divStyle = {
 class Home extends Component {
 
   state = {
-
+    title: "",
+    note: "",
     modal: []
     
   };
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+}
 
   componentDidMount() {
     this.loadModals();
@@ -25,6 +30,15 @@ class Home extends Component {
     API.getModal(id)
       .then(res => this.setState({modal:res.data}))
       .catch(err => console.log(err));
+  }
+
+  handleSubmit = () => {
+    API.addModal({
+      title: this.state.title,
+      note: this.state.note
+    }).then(data => {
+      console.log('DATA from the backend: ', data);
+    })
   }
 
 render() {
@@ -42,7 +56,12 @@ render() {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <AddModal />
+            <AddModal 
+              title={this.state.title}
+              note={this.state.note}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+            />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row stackable columns={3}>

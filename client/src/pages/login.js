@@ -14,7 +14,7 @@ import Steps from '../components/Steps';
 import Home from './home';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-const token = localStorage.token;
+
 
 //var md5 = require('md5');
 
@@ -36,7 +36,9 @@ class Login extends Component {
     handleLogin = async (e) => {
         e.preventDefault();
         console.log('you pressed the login btn');
-
+        const token = localStorage.getItem("token");
+        console.log('this is front end token: ', token);
+        localStorage.removeItem("token");
             const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
@@ -51,8 +53,10 @@ class Login extends Component {
             });
     
             let backEndRes = await response.json();
+            
             console.log("Back End Response", backEndRes);
-            localStorage.setItem("token", backEndRes.token);
+          
+            
             if (backEndRes.message === "none") {
                 alert("That email does not exist. If you don't have an Account, sign up!");
             
@@ -61,8 +65,9 @@ class Login extends Component {
                 alert("Invalid email/password");
             }
             else{
-                console.log("set to redirect HERE+++++++")
+                console.log("User is logged in")
                 this.setState({loggedIn: true});
+                localStorage.setItem("token", JSON.stringify(backEndRes.token));
             }
             
              
