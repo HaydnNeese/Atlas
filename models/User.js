@@ -15,7 +15,7 @@ var UserSchema = new Schema({
     question: String,
     answer: String,
         
-    modal: [
+    modals: [
         {
             type: Schema.Types.ObjectId,
             ref: "Modal"

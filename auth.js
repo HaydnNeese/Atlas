@@ -1,5 +1,6 @@
 
 var User = require('./models/User').User;
+var Modal = require('./models/Modal').Modal;
 var md5 = require('md5');
 const jwt=require('jsonwebtoken');
 const moment=require('moment');
@@ -14,10 +15,13 @@ module.exports = function(app){
   app.use(function(req,res,next){
     try{
     const token = req.header("Authorization").split(" ")[1]
-    console.log('TOKEN: ', token);
-    jwt.verify(token, "thisisaTOKENKEY", function (err, payload) {
-        console.log('this is PAYLOAD', payload)
-        if (payload.expires.isBefore(moment())) {                            //check if payload.expires is expired. if it is, then go next
+    //console.log('***** AUTH.JS TOKEN: ', token);
+    var verifyOptions = {
+      expiresIn: "10m"
+    }
+    jwt.verify(token, "thisisaTOKENKEY", verifyOptions, function (err, payload) {
+        console.log('This is PAYLOAD: ', payload);
+        if (payload.expires.isAfter(moment())) {                            //check if payload.expires is expired. if it is, then go next
             User.findById(payload.userId).then(
                 (doc)=>{
                     req.user=doc;
@@ -54,6 +58,7 @@ module.exports = function(app){
   // -------- Get for user login ----------
 
   app.post('/api/login', async (req, res) => {
+    //console.log('request header: ', req.header);
     //console.log('PRINTED req body', req.body);
     var reqEmail = req.body.email;                               //  set the username the email the user types in
     let currentUser = await User.find({ email: reqEmail });      //  only bring back that email
@@ -61,26 +66,32 @@ module.exports = function(app){
       //console.log("That email does not exist. If you don't have an account, sign up!");
       res.json({message: 'none'});
     }else{
-      //console.log('this is current user: ', currentUser[0]);
+     
       var dbPassword = currentUser[0].password;
-      //console.log("printed from AUTH.JS", JSON.stringify(dbPassword));
       var newPW = md5(req.body.password)              //hash what the user typed in
-      //console.log('New Password: ', newPW)
 
       if (checkPW(newPW, dbPassword)){
-        const token=jwt.sign({expires: moment().add(5, 'm'), userId:currentUser[0]._id}, "thisisaTOKENKEY");
-
-                    return res.status(200).json({
-                        userId: currentUser[0]._id,
-                        // username:user.username,
-                        // image:user.image,
-                        // name:user.first,
-                        token
-                    })
-      }                     //call the function to check the password. 
-      res.status(400).json({message:'Invalid Password/Username'});
-    }                                         //add moment js to note time the 
-    
+        //var date = new Date();
+        var ten_minutes = moment().add(10, 'm');
+        const token=jwt.sign({expires: ten_minutes, userId:currentUser[0]._id}, "thisisaTOKENKEY");
+          User.findById(currentUser[0]._id).populate("modals")  
+            .then(data => {
+              res.json({
+                userId: currentUser[0]._id,
+                // username:user.username,
+                // image:user.image,
+                // name:user.first,
+                expires: ten_minutes,
+                token,
+                data                  // this data should contain the notes (modals) attached to this user.
+            })
+            })
+                    
+      }else{
+        res.status(400).json({message:'Invalid Password/Username'});
+      }                     
+      
+    }                                        
   });
   
 }
