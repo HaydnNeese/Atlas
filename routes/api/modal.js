@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const dbController = require("../../controllers/controller")
-const protectedRoute = require("../../protect");
+const protectRoute = require("../../protect");
 
 //This is getting our /api/modal/:id route
 router.route("/:id")
-    .get(protectedRoute, dbController.findById)
+
+    .get(protectRoute, dbController.findById)
     
 // router.route("/post")
-    .post(protectedRoute, dbController.create)
+    .post(protectRoute, dbController.create)
 
 
 module.exports = router;

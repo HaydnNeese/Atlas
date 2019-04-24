@@ -8,15 +8,19 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+// state = {
+//   userID = ""
+// }
+
 function App() {
   return (
     <Router>
       <div className="content-div">
         <Nav />
         <Switch>
-          <Route exact path='/' component={Login} />
-          <Route exact path='/signup' component={Signup} />
-          <Route exact path='/home' component={Home} />
+          <Route exact path='/' component={() => <Login/>} />
+          <Route exact path='/signup' component={() => <Signup/>} />
+          <Route exact path='/home' component={() => <Home/>} />
           <Route component={NoMatch} />
         </Switch>
       </div>

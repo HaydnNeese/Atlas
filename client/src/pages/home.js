@@ -25,7 +25,10 @@ class Home extends Component {
 }
 
   componentDidMount() {
-    this.loadModals();
+    const id = localStorage.getItem("userId").replace(/"/g,"");
+
+    console.log('this is id in home.js: ', id);
+    this.loadModals(id);
   }
 
   loadModals = (id) => {
