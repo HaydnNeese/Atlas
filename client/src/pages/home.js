@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import titleLogo from '../images/atlas-black-logo.png';
-import { Grid, GridColumn, Image, Container } from 'semantic-ui-react'
+import { 
+  Grid, 
+  GridColumn, 
+  Image, 
+  Container,
+ } from 'semantic-ui-react'
 import PassCard from '../components/Card';
 import AddModal from '../components/AddModal';
 import API from "../utils/api"
@@ -45,6 +50,11 @@ render() {
     return (
     <Container>
       <Grid stackable style={divStyle} textAlign='center'>
+        <Grid.Row>
+          <Grid.Column>
+            
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row>
           <Grid.Column>
             <Image
