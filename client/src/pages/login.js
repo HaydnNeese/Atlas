@@ -35,7 +35,6 @@ class Login extends Component {
 
     handleLogin = async (e) => {
         e.preventDefault();
-        console.log('you pressed the login btn');
         const token = localStorage.getItem("token");
         console.log('this is front end token: ', token);
         localStorage.removeItem("token");
@@ -66,8 +65,10 @@ class Login extends Component {
             }
             else{
                 console.log("User is logged in")
-                this.setState({loggedIn: true});
                 localStorage.setItem("token", JSON.stringify(backEndRes.token));
+                console.log('login.js userId: ', backEndRes.userId);
+                localStorage.setItem("userId", JSON.stringify(backEndRes.userId));
+                this.setState({loggedIn: true});
             }
             
              

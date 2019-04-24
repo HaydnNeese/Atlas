@@ -4,6 +4,7 @@ export default {
 
     //get modals for a specific ID
     getModal: function (id) {
+        console.log('this is api.js id: ', id);
         return axios.get("/api/modal/" + id);
     },
 
