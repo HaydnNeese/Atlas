@@ -63,6 +63,13 @@ class Signup extends Component {
         }
     };
 
+    onOptionChange = event => {
+        this.setState({
+            question: event.target.textContent
+        })
+        //need this to write to the database
+    }
+
     render() {
         return (
             <Container style={divStyle}>
@@ -131,7 +138,12 @@ class Signup extends Component {
                                     />
                                 </Form.Field>
                                 {/* Security questions here */}
-                                <Form.Select required fluid label='Security Question' options={options} placeholder='Choose your security question' />
+                                <Form.Select required fluid 
+                                label='Security Question' 
+                                options={options} 
+                                onChange={this.onOptionChange} 
+                                placeholder='Choose your security question' 
+                                />
                                 <Form.Field required>
                                     <label>Security Answer</label>
                                     <Form.Input required

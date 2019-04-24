@@ -1,6 +1,6 @@
 
 
-function proctectRoute(req,res,next){
+function protectRoute(req,res,next){
     // if user exists the token was sent with the request
     if(req.user){
      //if user exists then go to next middleware
@@ -12,4 +12,4 @@ function proctectRoute(req,res,next){
     }
   }
 
-module.exports = proctectRoute
+module.exports = protectRoute
