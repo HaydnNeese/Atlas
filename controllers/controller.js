@@ -14,7 +14,7 @@ module.exports = {
         db.Modal
             .create(req.body)
             .then(dbModal => {
-                return db.User.findOneAndUpdate({_id: req.params.id}, {$push: {modals: dbModal._id}}, {new:ture})
+                return db.User.findOneAndUpdate({_id: req.params.id}, {$push: {modals: dbModal._id}}, {new:true})
             })
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));   
