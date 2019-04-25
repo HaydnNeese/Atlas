@@ -155,48 +155,6 @@ class Home extends Component {
         </Grid>
       </Container>
 
-=======
-    <Container>
-      <Grid stackable style={divStyle} textAlign='center'>
-        <Grid.Row>
-          <Grid.Column>
-            
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            <Image
-              centered
-              size="medium"
-              src={titleLogo}
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            <AddModal 
-              title={this.state.title}
-              note={this.state.note}
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-            />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row stackable columns={3}>
-          <GridColumn>
-            <SecurityCard />
-          </GridColumn>
-          <GridColumn>
-            <SecurityCard />
-          </GridColumn>
-          <GridColumn>
-            <SecurityCard />
-          </GridColumn>
-        </Grid.Row>
-      </Grid>
-    </Container>
-      
-
     );
   }
 }
