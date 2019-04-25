@@ -5,6 +5,6 @@
     z-index: 2;
 }
 
-#nav-link-login, #nav-link-signup {
+#nav-link-login, #nav-link-signup, #nav-link-logout {
     color: #EDF2F4;
 }
