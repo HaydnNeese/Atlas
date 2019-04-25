@@ -2,23 +2,24 @@ import React from 'react'
 import { Card, Image, Icon, Form, Button } from 'semantic-ui-react'
 
 //the card that will be shown after the security question is answered correctly
-export const PassCard = () => (
+export const PassCard = props => (
   <Card centered>
     <Image src='https://via.placeholder.com/250x250' />
     <Card.Content>
-      <Card.Header>Gmail</Card.Header>
+      <Card.Header>{props.title}</Card.Header>
       <Card.Meta>
-        <span className='Gmail card'>Click the icon to access your login details</span>
+        <span className='Gmail card' >{props.note}</span>
       </Card.Meta>
     </Card.Content>
   </Card>
 )
 
 //the card that will be shown on load based on the number of notes are saved to the user
-export const LockedCard = () => (
+export const LockedCard = props => (
   <Card centered>
     <Card.Content header='Gmail' />
-    <Card.Content className="fas fa-lock" description="Click the lock to answer a question and unlock this cards information" />
+    <Card.Content  description="Click the lock to answer a question and unlock this cards information" />
+    <button className="fas fa-lock lock-icon" onClick={props.handleLockButtonClick}></button>
     <Card.Content extra>
       <Icon name='clipboard' />
       4 Notes
@@ -26,13 +27,13 @@ export const LockedCard = () => (
   </Card>
 )
 
-export const SecurityCard = () => (
+export const SecurityCard = props => (
   <Card centered>
     <Card.Content header='Gmail' />
     <Card.Content>
       <Form>
-        <Form.Input label='A super challenging security question for the user' placeholder='Answer goes here' />
-        <Button>Submit</Button>
+        <Form.Input onChange = {props.handleAnswerInput} label={props.question} placeholder='Answer goes here' />
+        <Button onClick={props.handleAnswerSubmit}>Submit</Button>
       </Form>
     </Card.Content>
     <Card.Content extra>

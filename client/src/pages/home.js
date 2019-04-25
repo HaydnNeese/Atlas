@@ -8,24 +8,48 @@ import AddModal from '../components/AddModal';
 import API from "../utils/api"
 
 const divStyle = {
-    paddingTop: '90px',
+  paddingTop: '90px',
 };
+
+//dummy information
+const cardArray = [
+  {
+    id: 1,
+    title: "Gmail",
+    note: "Password is superfly55 and security question answer is Ramen Bowls"
+  },
+  {
+    id: 2,
+    title: "Facebook",
+    note: "Password is superFly_65 and email is megalodon_007@msn.com"
+  }
+]
+
+const securityArray = [
+  {
+    question: "2 + 2 = 4, true or false?",
+    answer: "true"
+  }
+]
 
 class Home extends Component {
 
   state = {
     title: "",
     note: "",
-    modal: []
-    
+    modal: [],
+    attempts: 3,
+    isCorrect: false,
+    locked: true,
+    answer: ''
   };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-}
+  }
 
   componentDidMount() {
-    const id = localStorage.getItem("userId").replace(/"/g,"");
+    const id = localStorage.getItem("userId").replace(/"/g, "");
 
     console.log('this is id in home.js: ', id);
     this.loadModals(id);
@@ -33,7 +57,7 @@ class Home extends Component {
 
   loadModals = (id) => {
     API.getModal(id)
-      .then(res => this.setState({modal:res.data}))
+      .then(res => this.setState({ modal: res.data }))
       .catch(err => console.log(err));
   }
 
@@ -46,8 +70,92 @@ class Home extends Component {
     })
   }
 
-render() {
+  handleLockButtonClick = () => {
+    this.setState({
+      locked: false
+    })
+  }
+
+  handleAnswerInput = event => {
+    this.setState({ answer: event.target.value });
+  }
+
+  handleAnswerSubmit = event => {
+    event.preventDefault();
+    console.log(securityArray[0].answer)
+    console.log(this.state.answer);
+    if (this.state.answer === securityArray[0].answer) {
+      console.log("if-statement");
+      this.setState({
+        isCorrect: true
+      })
+    }
+  }
+
+  render() {
     return (
+
+      <Container>
+        <Grid stackable style={divStyle} textAlign='center'>
+          <Grid.Row>
+            <Grid.Column>
+              <Image
+                centered
+                size="medium"
+                src={titleLogo}
+              />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <AddModal
+                title={this.state.title}
+                note={this.state.note}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit}
+              />
+            </Grid.Column>
+          </Grid.Row>
+          {this.state.locked ? (
+            <Grid.Row stackable columns={3}>
+              <GridColumn>
+                <LockedCard
+                  handleLockButtonClick = {this.handleLockButtonClick}
+                />
+              </GridColumn>
+            </Grid.Row>
+          ) : (
+              this.state.isCorrect ? (
+                <Grid.Row stackable columns={3}>
+                {cardArray.map((card, i) => {
+                   return (
+                   <GridColumn>
+                      <PassCard 
+                      title = {card.title}
+                      note = {card.note}
+                      />
+                  </GridColumn>
+                  )
+                  })}
+                </Grid.Row>
+              ) : (
+                  <Grid.Row stackable columns={3}>
+                    <GridColumn>
+                      <SecurityCard
+                        handleAnswerInput = {this.handleAnswerInput}
+                        name="answer"
+                        value={this.state.answer}
+                        handleAnswerSubmit={this.handleAnswerSubmit}
+                        question={securityArray[0].question}
+                      />
+                    </GridColumn>
+                  </Grid.Row>
+                )
+            )}
+        </Grid>
+      </Container>
+
+=======
     <Container>
       <Grid stackable style={divStyle} textAlign='center'>
         <Grid.Row>
@@ -88,8 +196,9 @@ render() {
       </Grid>
     </Container>
       
+
     );
-}
+  }
 }
 //we need to have it read the total number of stored notes
 //on each note it should show the LockedCard component
