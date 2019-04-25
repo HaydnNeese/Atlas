@@ -52,6 +52,11 @@ render() {
       <Grid stackable style={divStyle} textAlign='center'>
         <Grid.Row>
           <Grid.Column>
+            
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
             <Image
               centered
               size="medium"
