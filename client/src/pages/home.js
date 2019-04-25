@@ -1,19 +1,9 @@
 import React, { Component } from "react";
 import titleLogo from '../images/atlas-black-logo.png';
-<<<<<<< HEAD
-import { 
-  Grid, 
-  GridColumn, 
-  Image, 
-  Container,
- } from 'semantic-ui-react'
-import PassCard from '../components/Card';
-=======
 import { Grid, GridColumn, Image, Container } from 'semantic-ui-react'
 import { PassCard, LockedCard, SecurityCard } from '../components/Card';
 // we need to make a ternary expression or something like that that will help choose which of these will render
 // you can just pass in the different card names and to see what they look like
->>>>>>> 6bc85d5c903974a666799a6a10a0a498edde5540
 import AddModal from '../components/AddModal';
 import API from "../utils/api"
 
