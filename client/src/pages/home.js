@@ -104,6 +104,7 @@ class Home extends Component {
 
   render() {
     return (
+
       <Container>
         <Grid stackable style={divStyle} textAlign='center'>
           <Grid.Row>

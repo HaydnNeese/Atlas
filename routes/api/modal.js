@@ -5,10 +5,10 @@ const protectRoute = require("../../protect");
 //This is getting our /api/modal/:id route
 router.route("/:id")
 
-    .get(protectRoute, dbController.findById)
+    .get(dbController.findById)
     
 // router.route("/post")
-    .post(protectRoute, dbController.create)
+    .post(dbController.create)
 
 
 module.exports = router;
