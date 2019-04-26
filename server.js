@@ -1,4 +1,5 @@
 const express = require('express');
+var mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 const routes = require("./routes");
@@ -9,7 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Add routes, both API and view
 app.use(routes);
 
-var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/atlasDB');
 
