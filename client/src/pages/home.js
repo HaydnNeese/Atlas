@@ -14,14 +14,19 @@ const divStyle = {
 //dummy information
 const cardArray = [
   {
-    id: 1,
-    title: "Gmail",
-    note: "Password is superfly55 and security question answer is Ramen Bowls"
+    title: "Gmail account",
+    note: "Password is my favorite food from that trip in california and security question answer is Ramen Bowls",
+    image: "https://assets.hardwarezone.com/img/2016/02/gmail.jpg"
   },
   {
-    id: 2,
-    title: "Facebook",
-    note: "Password is superFly_65 and email is megalodon_007@msn.com"
+    title: "Facebook account",
+    note: "Password is my ex-wife's dogs name  and email is megalodon_007@msn.com",
+    image: "https://www.sketchappsources.com/resources/source-image/facebook-logo.jpg"
+  },
+  {
+    title: "NFL.com Fantasy Football",
+    note: "Password is Mahomes_69 and email is raiders_suck@chiefs.com",
+    image: "https://hd-report.com/wp-content/uploads/2018/09/nfl-logo-gradient-1980px.jpg"
   }
 ]
 
@@ -41,7 +46,8 @@ class Home extends Component {
     attempts: 3,
     isCorrect: false,
     locked: true,
-    answer: ''
+    answer: '',
+    noteTotal: 0
   };
 
   handleChange = event => {
@@ -89,6 +95,10 @@ class Home extends Component {
       this.setState({
         isCorrect: true
       })
+    }else {
+      this.setState({
+        attempts: this.state.attempts - 1
+      })
     }
   }
 
@@ -117,52 +127,67 @@ class Home extends Component {
           </Grid.Row>
           {this.state.locked ? (
             <Grid.Row stackable columns={3}>
+            {cardArray.map((card) => {
+              return (
               <GridColumn>
                 <LockedCard
-                  handleLockButtonClick = {this.handleLockButtonClick}
+                  handleLockButtonClick={this.handleLockButtonClick}
+                  title = {card.title}
+                  image = {card.image}
+                  notes = {this.state.noteTotal}
                 />
               </GridColumn>
+              )
+            })}
             </Grid.Row>
           ) : (
               this.state.isCorrect ? (
                 <Grid.Row stackable columns={3}>
-                {cardArray.map((card, i) => {
-                   return (
-                   <GridColumn>
-                      <PassCard 
-                      title = {card.title}
-                      note = {card.note}
-                      />
-                  </GridColumn>
-                  )
+                  {cardArray.map((card) => {
+                    return (
+                      <GridColumn>
+                        <PassCard
+                          title={card.title}
+                          note={card.note}
+                          image = {card.image}
+                        />
+                      </GridColumn>
+                    )
                   })}
                 </Grid.Row>
               ) : (
                   <Grid.Row stackable columns={3}>
-                    <GridColumn>
-                      <SecurityCard
-                        handleAnswerInput = {this.handleAnswerInput}
-                        name="answer"
-                        value={this.state.answer}
-                        handleAnswerSubmit={this.handleAnswerSubmit}
-                        question={securityArray[0].question}
-                      />
-                    </GridColumn>
+                    {cardArray.map((card) => {
+                      return (
+                        <GridColumn>
+                          <SecurityCard
+                            handleAnswerInput={this.handleAnswerInput}
+                            title = {card.title}
+                            name="answer"
+                            value={this.state.answer}
+                            handleAnswerSubmit={this.handleAnswerSubmit}
+                            question={securityArray[0].question}
+                            image = {card.image}
+                            attempts = {this.state.attempts}
+                          />
+                        </GridColumn>
+                      )
+                    })}
                   </Grid.Row>
-                )
-            )}
+                  )
+              )}
         </Grid>
       </Container>
-
-    );
-  }
-}
-//we need to have it read the total number of stored notes
-//on each note it should show the LockedCard component
-//click on the lock to reveal the SecurityCard component
-//then have the SecurityCard receive the stored security question and display it to the card
-//capture the answer and compare it with the stored answer
-//if it is correct then reveal the PassCard and maybe use the success tool that Semantic UI has
-//if it is incorrect use the incorrect tool that semantic UI has and have the total number of tries reduce by 1
-//after three failed tries have it lock the user out (optional)
-export default Home;
+    
+        );
+      }
+    }
+    //we need to have it read the total number of stored notes
+    //on each note it should show the LockedCard component
+    //click on the lock to reveal the SecurityCard component
+    //then have the SecurityCard receive the stored security question and display it to the card
+    //capture the answer and compare it with the stored answer
+    //if it is correct then reveal the PassCard and maybe use the success tool that Semantic UI has
+    //if it is incorrect use the incorrect tool that semantic UI has and have the total number of tries reduce by 1
+    //after three failed tries have it lock the user out (optional)
+    export default Home;
