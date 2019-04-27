@@ -47,7 +47,8 @@ class Home extends Component {
     isCorrect: false,
     locked: true,
     answer: '',
-    noteTotal: 0
+    noteTotal: 0,
+    modalOpen: false
   };
 
   handleChange = event => {
@@ -73,6 +74,13 @@ class Home extends Component {
       .catch(err => console.log(err));
   }
 
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => {
+    this.setState({ modalOpen: false })
+    console.log("modal closed")
+  }
+
   handleSubmit = () => {
    
     const id = localStorage.getItem("userId").replace(/"/g, "");
@@ -83,6 +91,7 @@ class Home extends Component {
       note: this.state.note
     }).then(data => {
       console.log('DATA from the backend: ', data);
+      this.handleClose()
     })
   }
 
@@ -131,8 +140,10 @@ class Home extends Component {
               <AddModal
                 title={this.state.title}
                 note={this.state.note}
+                open={this.state.modalOpen}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
+                handleOpen={this.handleOpen}
               />
             </Grid.Column>
           </Grid.Row>
