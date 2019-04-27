@@ -33,7 +33,7 @@ const AddModal = (props) => (
                         value={props.note}/>
                     <Modal.Actions>
                         <Button.Group id="modalBtn" floated='right'>
-                            <Button negative>Cancel</Button>
+                            <Button onClick={props.handleClose} negative>Cancel</Button>
                             <Button.Or />
                             <Button color="blue" type="submit"  onClick={props.handleSubmit}>Add</Button>
                         </Button.Group>
