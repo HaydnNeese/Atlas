@@ -19,6 +19,7 @@ module.exports = function(app){
     var verifyOptions = {
       expiresIn: "10m"
     }
+    
     jwt.verify(token, "thisisaTOKENKEY", verifyOptions, function (err, payload) {
         console.log('This is PAYLOAD: ', payload);
         if (payload.expires.isAfter(moment())) {                            //check if payload.expires is expired. if it is, then go next
@@ -73,7 +74,12 @@ module.exports = function(app){
       if (checkPW(newPW, dbPassword)){
         //var date = new Date();
         var ten_minutes = moment().add(10, 'm');
-        const token=jwt.sign({expires: ten_minutes, userId:currentUser[0]._id}, "thisisaTOKENKEY");
+        // const token=jwt.sign({expires: ten_minutes, userId:currentUser[0]._id}, "thisisaTOKENKEY");
+
+             //if user log in success, generate a JWT token for the user with a secret key
+        const token=jwt.sign({UserId:currentUser[0]._id}, 'thisisaTOKENKEY', { expiresIn: '5s' });
+        console.log(token);
+        
           User.findById(currentUser[0]._id).populate("modals")  
             .then(data => {
               res.json({

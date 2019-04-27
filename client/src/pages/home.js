@@ -68,7 +68,11 @@ class Home extends Component {
   }
 
   handleSubmit = () => {
-    API.addModal({
+   
+    const id = localStorage.getItem("userId").replace(/"/g, "");
+
+    API.addModal( id,
+    {
       title: this.state.title,
       note: this.state.note
     }).then(data => {

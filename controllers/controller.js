@@ -16,10 +16,14 @@ module.exports = {
     },
 
     create: function (req, res) {
+       
+       console.log("THIS IS OUR REQUEST BODY", req.body);
+
         Modal
             .create(req.body)
             .then(dbModal => {
-                return db.User.findOneAndUpdate({_id: req.params.id}, {$push: {modals: dbModal._id}}, {new:true})
+               console.log("THIS IS OUR REQEST THEN", dbModal)
+                return User.findOneAndUpdate({_id: req.params.id}, {$push: {modals: dbModal._id}}, {new:true})
             })
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));   
