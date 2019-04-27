@@ -11,7 +11,12 @@ module.exports = {
         User
             .findById(req.params.id)
             .populate("modals")
-            .then(dbUser => res.json(dbUser))
+            .then(dbUser => { 
+                
+                res.json(dbUser);
+                console.log("THIS IS THE RESPONSE FROM DBUSER FIND BY ID >>>>>", dbUser);
+            
+            })
             .catch(err => res.status(422).json(err))
     },
 
