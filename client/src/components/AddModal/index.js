@@ -4,7 +4,11 @@ import { Button, Header, Form, Modal } from 'semantic-ui-react'
 
 
 const AddModal = (props) => (
-    <Modal trigger={<Button content='Add New' icon='plus' color="blue" labelPosition='left' />}>
+    <Modal 
+        trigger={<Button content='Add New' icon='plus' color="blue" onClick={props.handleOpen} labelPosition='left' />}
+        open={props.open}
+        onClose={props.handleClose}
+    >
         <Modal.Header></Modal.Header>
         <Modal.Content>
             <Modal.Description>
@@ -31,7 +35,7 @@ const AddModal = (props) => (
                         <Button.Group id="modalBtn" floated='right'>
                             <Button negative>Cancel</Button>
                             <Button.Or />
-                            <Button color="blue" type="submit" onClick={props.handleSubmit}>Add</Button>
+                            <Button color="blue" type="submit"  onClick={props.handleSubmit}>Add</Button>
                         </Button.Group>
                     </Modal.Actions>
                 </Form>
