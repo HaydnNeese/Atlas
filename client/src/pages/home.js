@@ -12,23 +12,23 @@ const divStyle = {
 };
 
 //dummy information
-const cardArray = [
-  {
-    title: "Gmail account",
-    note: "Password is my favorite food from that trip in california and security question answer is Ramen Bowls",
-    image: "https://assets.hardwarezone.com/img/2016/02/gmail.jpg"
-  },
-  {
-    title: "Facebook account",
-    note: "Password is my ex-wife's dogs name  and email is megalodon_007@msn.com",
-    image: "https://www.sketchappsources.com/resources/source-image/facebook-logo.jpg"
-  },
-  {
-    title: "NFL.com Fantasy Football",
-    note: "Password is Mahomes_69 and email is raiders_suck@chiefs.com",
-    image: "https://hd-report.com/wp-content/uploads/2018/09/nfl-logo-gradient-1980px.jpg"
-  }
-]
+// const cardArray = [
+//   {
+//     title: "Gmail account",
+//     note: "Password is my favorite food from that trip in california and security question answer is Ramen Bowls",
+//     image: "https://assets.hardwarezone.com/img/2016/02/gmail.jpg"
+//   },
+//   {
+//     title: "Facebook account",
+//     note: "Password is my ex-wife's dogs name  and email is megalodon_007@msn.com",
+//     image: "https://www.sketchappsources.com/resources/source-image/facebook-logo.jpg"
+//   },
+//   {
+//     title: "NFL.com Fantasy Football",
+//     note: "Password is Mahomes_69 and email is raiders_suck@chiefs.com",
+//     image: "https://hd-report.com/wp-content/uploads/2018/09/nfl-logo-gradient-1980px.jpg"
+//   }
+// ]
 
 const securityArray = [
   {
@@ -82,7 +82,6 @@ class Home extends Component {
   }
 
   handleSubmit = () => {
-   
     const id = localStorage.getItem("userId").replace(/"/g, "");
 
     API.addModal( id,
@@ -93,6 +92,7 @@ class Home extends Component {
       console.log('DATA from the backend: ', data);
       this.handleClose()
     })
+    window.location.reload();
   }
 
   handleLockButtonClick = () => {
@@ -149,13 +149,12 @@ class Home extends Component {
           </Grid.Row>
           {this.state.locked ? (
             <Grid.Row stackable columns={3}>
-            {cardArray.map((card) => {
+            {this.state.modal.map((card) => {
               return (
               <GridColumn>
                 <LockedCard
                   handleLockButtonClick={this.handleLockButtonClick}
                   title = {card.title}
-                  image = {card.image}
                   notes = {this.state.noteTotal}
                 />
               </GridColumn>
@@ -165,13 +164,12 @@ class Home extends Component {
           ) : (
               this.state.isCorrect ? (
                 <Grid.Row stackable columns={3}>
-                  {cardArray.map((card) => {
+                  {this.state.modal.map((card) => {
                     return (
                       <GridColumn>
                         <PassCard
                           title={card.title}
                           note={card.note}
-                          image = {card.image}
                         />
                       </GridColumn>
                     )
@@ -179,7 +177,7 @@ class Home extends Component {
                 </Grid.Row>
               ) : (
                   <Grid.Row stackable columns={3}>
-                    {cardArray.map((card) => {
+                    {this.state.modal.map((card) => {
                       return (
                         <GridColumn>
                           <SecurityCard
@@ -189,7 +187,6 @@ class Home extends Component {
                             value={this.state.answer}
                             handleAnswerSubmit={this.handleAnswerSubmit}
                             question={securityArray[0].question}
-                            image = {card.image}
                             attempts = {this.state.attempts}
                           />
                         </GridColumn>
@@ -204,8 +201,8 @@ class Home extends Component {
         );
       }
     }
-    //we need to have it read the total number of stored notes
-    //on each note it should show the LockedCard component
+    //we need to have it read the total number of stored cards
+    //on each card it should show the LockedCard component
     //click on the lock to reveal the SecurityCard component
     //then have the SecurityCard receive the stored security question and display it to the card
     //capture the answer and compare it with the stored answer
