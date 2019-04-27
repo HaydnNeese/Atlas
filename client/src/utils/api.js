@@ -1,21 +1,21 @@
 import axios from "axios";
 
-const instance = () => 
-    axios.create({
-        timeout: 1000,
-        headers: {Authorization: localStorage.getItem("token")}
-    });
-
 export default {
+
     //get modals for a specific ID
-    getModal: function(id) {
+    getModal: function (id) {
         console.log('this is api.js id: ', id);
-        return instance().get("/api/modal/" + id);
-    }, 
-    //post for adding modals
-    addModal: function(id, data) {
-        return instance().post("/api/modal/post/", id, data);
+        console.log(`/api/modal/${id}`);
+        return axios.get("/api/modal/" + id);
+    },
+
+    // need post for creating new notes (modals)
+    addModal: function (id,data) {
+        console.log("WE ARE AT THE POST ROUTE>>>>>>>");
+        console.log(`this is my ID being ${id}`);
+        console.log(`This is the TEST DATA ${data}`);
+        
+        return axios.post("/api/modal/" + id , data);
     }
+
 };
-
-

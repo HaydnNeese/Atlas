@@ -84,15 +84,36 @@ class Home extends Component {
   handleSubmit = () => {
     const id = localStorage.getItem("userId").replace(/"/g, "");
 
-    API.addModal( id,
-    {
-      title: this.state.title,
-      note: this.state.note
-    }).then(data => {
-      console.log('DATA from the backend: ', data);
-      this.handleClose()
-    })
-    window.location.reload();
+    // API.addModal( id,
+    // {
+    //   title: this.state.title,
+    //   note: this.state.note
+    // }).then(data => {
+    //   console.log('DATA from the backend: ', data);
+    //   this.handleClose()
+    // })
+    
+    for (var i = 0 ; i < this.state.modal.length; i++){
+
+    if(this.state.modal[i].title === this.state.title ) {
+
+      alert("Note with this title already exists. Please create a unique Title")
+      return;    
+  
+    } else {
+      API.addModal( id,
+        {
+          title: this.state.title,
+          note: this.state.note
+        }).then(data => {
+          console.log('DATA from the backend: ', data);
+          this.handleClose()
+        })
+        
+    }
+    
+  }
+  window.location.reload();
   }
 
   handleLockButtonClick = () => {
