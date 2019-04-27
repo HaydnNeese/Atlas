@@ -64,7 +64,13 @@ class Home extends Component {
 
   loadModals = (id) => {
     API.getModal(id)
-      .then(res => this.setState({ modal: res.data }))
+      .then(res  => { 
+        
+        console.log("THIS IS THE FRONT END RESPONSE", res.data.modals);
+        this.setState({ modal: res.data.modals });
+        console.log(this.state.modal);
+        
+     })
       .catch(err => console.log(err));
   }
 
