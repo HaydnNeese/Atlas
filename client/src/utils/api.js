@@ -8,7 +8,6 @@ export default {
         console.log(`/api/modal/${id}`);
         return axios.get("/api/modal/" + id);
     },
-
     // need post for creating new notes (modals)
     addModal: function (id,data) {
         console.log("WE ARE AT THE POST ROUTE>>>>>>>");
@@ -18,5 +17,5 @@ export default {
         return axios.post("/api/modal/" + id , data);
     }
 
-};
 
+};
