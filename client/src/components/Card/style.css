@@ -1,3 +1,24 @@
-button.lock-icon {
-    width: 10%;
+.ui.card>.button, .ui.card>.buttons, .ui.cards>.card>.button, .ui.cards>.card>.buttons  {
+    width: 20%;
+    margin-left: 39%;
+    margin-bottom: 5%;
+}
+.ui.grid>.row>[class*="center aligned"].column.column, .ui.grid>[class*="center aligned"].column.column, .ui.grid>[class*="center aligned"].row>.column, .ui[class*="center aligned"].grid>.column, .ui[class*="center aligned"].grid>.row>.column {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#delete-btn {
+    background-color: #8ecbff;
+}
+#edit-btn {
+    background-color: #bcff9d;
+}
+
+#lock-btn {
+    background-color: #8ecbff;
+}
+
+#submit-btn {
+    background-color: #bcff9d;
 }

@@ -5,35 +5,17 @@ import { PassCard, LockedCard, SecurityCard } from '../components/Card';
 // we need to make a ternary expression or something like that that will help choose which of these will render
 // you can just pass in the different card names and to see what they look like
 import AddModal from '../components/AddModal';
-import API from "../utils/api"
+import API from "../utils/api";
+import swal from "sweetalert";
 
 const divStyle = {
   paddingTop: '90px',
 };
 
-//dummy information
-// const cardArray = [
-//   {
-//     title: "Gmail account",
-//     note: "Password is my favorite food from that trip in california and security question answer is Ramen Bowls",
-//     image: "https://assets.hardwarezone.com/img/2016/02/gmail.jpg"
-//   },
-//   {
-//     title: "Facebook account",
-//     note: "Password is my ex-wife's dogs name  and email is megalodon_007@msn.com",
-//     image: "https://www.sketchappsources.com/resources/source-image/facebook-logo.jpg"
-//   },
-//   {
-//     title: "NFL.com Fantasy Football",
-//     note: "Password is Mahomes_69 and email is raiders_suck@chiefs.com",
-//     image: "https://hd-report.com/wp-content/uploads/2018/09/nfl-logo-gradient-1980px.jpg"
-//   }
-// ]
-
 const securityArray = [
   {
     question: "2 + 2 = 4, true or false?",
-    answer: "true"
+    answer: "true" || "True"
   }
 ]
 
@@ -48,7 +30,8 @@ class Home extends Component {
     locked: true,
     answer: '',
     noteTotal: 0,
-    modalOpen: false
+    modalOpen: false,
+    clicked: false
   };
 
   handleChange = event => {
@@ -64,12 +47,7 @@ class Home extends Component {
 
   loadModals = (id) => {
     API.getModal(id)
-      .then(res  => { 
-        
-        console.log("THIS IS THE FRONT END RESPONSE", res.data.modals);
-        this.setState({ modal: res.data.modals });
-        console.log(this.state.modal);
-        
+      .then(res  => { this.setState({ modal: res.data.modals });
      })
       .catch(err => console.log(err));
   }
@@ -83,7 +61,6 @@ class Home extends Component {
 
   handleSubmit = () => {
     const id = localStorage.getItem("userId").replace(/"/g, "");
-
     // API.addModal( id,
     // {
     //   title: this.state.title,
@@ -128,17 +105,21 @@ class Home extends Component {
 
   handleAnswerSubmit = event => {
     event.preventDefault();
-    console.log(securityArray[0].answer)
-    console.log(this.state.answer);
     if (this.state.answer === securityArray[0].answer) {
-      console.log("if-statement");
+      swal("Correct!", "You may enter...", "success");
       this.setState({
         isCorrect: true
-      })
+      });
+      document.getElementById('secure-input').value='';
+    }else if(this.state.answer === "") {
+      swal("You forgot to put an answer!", "You must answer the question before entering submit.", "warning");
+      document.getElementById('secure-input').value='';
     }else {
+      swal("You put the wrong answer!", "Try again, you only get three chances", "error");
       this.setState({
         attempts: this.state.attempts - 1
-      })
+      });
+      document.getElementById('secure-input').value='';
     }
   }
 
