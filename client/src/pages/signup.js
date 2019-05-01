@@ -56,6 +56,7 @@ class Signup extends Component {
             var body1 = await response.json();
             console.log("printed from signupJS", body1);
             this.setState({ responseToPost: body1 });
+            window.location.href = "/";
         } catch (err) {
             console.error(err.toString())
         }

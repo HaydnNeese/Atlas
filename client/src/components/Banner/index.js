@@ -19,7 +19,7 @@ const btnStyle = {
     border: '1px black solid'
 }
 
-const Banner = pageSlide => (
+const Banner = () => (
     <Segment style={bannerStyle}>
         <Grid>
             <Grid.Row stackable columns={3}>
@@ -37,7 +37,7 @@ const Banner = pageSlide => (
                 </Grid.Column>
                 <Grid.Column width={4}>
                     <div>
-                        <a href='#main-logo' onClick={pageSlide}><Button style={btnStyle} color='green'>Get Started</Button></a>
+                        <a href='#main-logo'><Button style={btnStyle} color='green'>Get Started</Button></a>
                     </div>
                     <div>
                         <Button style={btnStyle} color='pink'>Learn How</Button>

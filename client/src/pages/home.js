@@ -9,6 +9,10 @@ import Banner from '../components/Banner';
 import API from "../utils/api";
 import swal from "sweetalert";
 
+const homeBG = {
+  background: "linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)"
+}
+
 const divStyle = {
   paddingTop: '30px',
   // background: 'linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)'
@@ -107,20 +111,10 @@ class Home extends Component {
     }
   }
 
-  handlePageSlide = event => {
-      event.preventDefault();
-      let hash = this.hash;
-      document.getElementsByTagName('body').animate({
-          scrollTop: document.getElementById(hash).offset().top - 50
-        }, 800, function(){
-          window.location.hash = hash;
-      });
-  }
-
   render() {
     return (
-    <div>
-      <Banner pageSlide={this.handlePageSlide}/>
+    <div style={homeBG}>
+      <Banner />
       <Container>
         <Grid stackable style={divStyle} textAlign='center'>
           <Grid.Row>
@@ -142,6 +136,7 @@ class Home extends Component {
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
                 handleOpen={this.handleOpen}
+                handleClose={this.handleClose}
               />
             </Grid.Column>
           </Grid.Row>
