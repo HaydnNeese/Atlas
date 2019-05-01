@@ -5,11 +5,13 @@ import { PassCard, LockedCard, SecurityCard } from '../components/Card';
 // we need to make a ternary expression or something like that that will help choose which of these will render
 // you can just pass in the different card names and to see what they look like
 import AddModal from '../components/AddModal';
+import Banner from '../components/Banner';
 import API from "../utils/api";
 import swal from "sweetalert";
 
 const divStyle = {
-  paddingTop: '90px',
+  paddingTop: '30px',
+  // background: 'linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)'
 };
 
 const securityArray = [
@@ -123,14 +125,26 @@ class Home extends Component {
     }
   }
 
+  handlePageSlide = event => {
+      event.preventDefault();
+      let hash = this.hash;
+      document.getElementsByTagName('body').animate({
+          scrollTop: document.getElementById(hash).offset().top - 50
+        }, 800, function(){
+          window.location.hash = hash;
+      });
+  }
+
   render() {
     return (
-
+    <div>
+      <Banner pageSlide={this.handlePageSlide}/>
       <Container>
         <Grid stackable style={divStyle} textAlign='center'>
           <Grid.Row>
             <Grid.Column>
               <Image
+                id="main-logo"
                 centered
                 size="medium"
                 src={titleLogo}
@@ -199,7 +213,7 @@ class Home extends Component {
               )}
         </Grid>
       </Container>
-    
+    </div>
         );
       }
     }
