@@ -55,25 +55,25 @@ module.exports = function(app) {
   // -------- Get for user login ----------
 
   app.post('/api/login', (req, res) => {
-    console.log('REQUEST ', req.body);
+    //console.log('REQUEST ', req.body);
     let currentUser;
     User.findOne({email: req.body.email}, (err, data) => {
       //console.log(data);
       currentUser = data;
 
-      console.log('Current User: ', currentUser);
+      console.log('AuthJS Current User: ', currentUser);
     if (!currentUser) {
-      return res.status(400).json({message: "none"});
+      return res.json({message: "none"});
     }
     const hashedPassword = md5(req.body.password);
 
     if (!checkPW(hashedPassword, currentUser.password)) {
-      return res.status(403).json({message: "Invalid Passowrd/Username"});
+      return res.json({message: "Invalid Password/Username"});
     }
     const token = jwt.sign({userID: currentUser._id}, SECRET, {
       expiresIn: 600
     });
-    console.log('this is login token: ', token);
+    //console.log('this is login token: ', token);
     User.findById(currentUser._id)
       //.populate("modals")
       .then(data => {

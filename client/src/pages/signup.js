@@ -65,13 +65,14 @@ class Signup extends Component {
           default:
             break;
         }
-        this.setState({formErrors: fieldValidationErrors,
-                        emailValid: emailValid,
-                        passwordValid: passwordValid,
-                        usernameValid: usernameValid, 
-                        phoneValid: phoneValid,
-                        pinValid: pinValid
-                      }, this.validateForm);
+        this.setState({
+            formErrors: fieldValidationErrors,
+            emailValid: emailValid,
+            passwordValid: passwordValid,
+            usernameValid: usernameValid, 
+            phoneValid: phoneValid,
+            pinValid: pinValid
+            }, this.validateForm);
       }
       
       validateForm() {
@@ -121,12 +122,11 @@ class Signup extends Component {
                             src={titleLogo}
                         />
                         <Header as="h2" textAlign="center">
-                            Signup for secure information storage.
+                            Sign up for Secure Information Storage                           
                         </Header>
                         <Segment>
                             <Form size="large">
-                                {/* This is where our errors will be displayed */}
-                                <FormErrors formErrors={this.state.formErrors} />
+                                
                                 <Form.Field required>
                                     <label>Username</label>
                                     <Form.Input required
@@ -159,7 +159,7 @@ class Signup extends Component {
                                         fluid
                                         icon="envelope"
                                         iconPosition="left"
-                                        placeholder="i-am-sick@frontend.com"
+                                        placeholder="email@domain.com"
                                         type="email"
                                         name="email"
                                         onChange={this.handleChange}
@@ -173,7 +173,7 @@ class Signup extends Component {
                                         icon="phone"
                                         iconPosition="left"
                                         placeholder="(123) 456-7890"
-                                        type="tel"
+                                        type="number"
                                         name="phone"
                                         onChange={this.handleChange}
                                         value={this.state.phone}
@@ -192,6 +192,8 @@ class Signup extends Component {
                                         value={this.state.pin}
                                     />
                                 </Form.Field>
+                                {/* This is where our errors will be displayed */}
+                                <FormErrors textAlign="center" formErrors={this.state.formErrors}/>
                                 <Button type="submit" color="blue" value="Submit" fluid size="large" onClick={this.handleSubmit} disabled={!this.state.formValid}>
                                     Submit
                                 </Button>
