@@ -51,8 +51,7 @@ class Signup extends Component {
                     password: this.state.password,
                     phone: this.state.phone,
                     email: this.state.email,
-                    question: this.state.question,
-                    answer: this.state.answer
+                    pin: this.state.pin,
                 }),
             });
             var body1 = await response.json();
@@ -63,12 +62,12 @@ class Signup extends Component {
         }
     };
 
-    onOptionChange = event => {
-        this.setState({
-            question: event.target.textContent
-        })
-        //need this to write to the database
-    }
+    // onOptionChange = event => {
+    //     this.setState({
+    //         question: event.target.textContent
+    //     })
+    //     //need this to write to the database
+    // }
 
     render() {
         return (
@@ -138,23 +137,23 @@ class Signup extends Component {
                                     />
                                 </Form.Field>
                                 {/* Security questions here */}
-                                <Form.Select required fluid 
+                                {/* <Form.Select required fluid 
                                 label='Security Question' 
                                 options={options} 
                                 onChange={this.onOptionChange} 
                                 placeholder='Choose your security question' 
-                                />
+                                /> */}
                                 <Form.Field required>
-                                    <label>Security Answer</label>
+                                    <label>Set Pin Number</label>
                                     <Form.Input required
                                         fluid
                                         icon="lock"
                                         iconPosition="left"
-                                        placeholder="Answer"
-                                        type="text"
-                                        name="answer"
+                                        placeholder="Pin Number"
+                                        type="number"
+                                        name="pin"
                                         onChange={this.handleChange}
-                                        value={this.state.answer}
+                                        value={this.state.pin}
                                     />
                                 </Form.Field>
                                 <Button type="submit" color="blue" value="Submit" fluid size="large" onClick={this.handleSubmit}>
