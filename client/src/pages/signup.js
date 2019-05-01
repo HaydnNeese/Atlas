@@ -52,7 +52,7 @@ class Signup extends Component {
             break;
           case 'username':
             usernameValid = value.length >= 4;
-            fieldValidationErrors.username = usernameValid ? '': ' us too short';
+            fieldValidationErrors.username = usernameValid ? '': ' is too short';
             break;
           case 'phone':
             phoneValid = value.match(/\d/g).length===10;
