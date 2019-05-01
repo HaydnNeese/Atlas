@@ -12,10 +12,10 @@ export const PassCard = props => (
       </Card.Meta>
     </Card.Content >
     <Card.Content className="dark" extra>
-      <div class="ui buttons">
-        <button class="ui button" id="edit-btn">edit</button>
-        <div class="or"></div>
-        <button class="ui button" id="delete-btn">delete</button>
+      <div className="ui buttons">
+        <button className="ui button" id="edit-btn">edit</button>
+        <div className="or"></div>
+        <button className="ui button" id="delete-btn">delete</button>
       </div>
     </Card.Content>
   </Card>

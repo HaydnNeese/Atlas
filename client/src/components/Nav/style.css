@@ -2,7 +2,7 @@
     background-image: linear-gradient(rgb(30, 31, 46), #2B2D42, rgb(66, 69, 100));
     position: fixed;
     width:100%;
-    z-index: 3;
+    z-index: 4;
 }
 
 #nav-link-login, #nav-link-signup, #nav-link-logout {

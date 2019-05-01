@@ -16,7 +16,7 @@ const AddModal = (props) => (
                 <Form>
                     <Form.Field required>
                         <label>Title of Note</label>
-                        <Form.Input required
+                        <Form.Input
                             fluid
                             placeholder="Secret Note/Password Hints..."
                             type="text"
