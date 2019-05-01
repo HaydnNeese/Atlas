@@ -61,8 +61,8 @@ class Home extends Component {
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => {
-    this.setState({ modalOpen: false })
-    console.log("modal closed")
+    this.setState({ modalOpen: false });
+    console.log("modal closed");
   }
 
   handleSubmit = () => {
