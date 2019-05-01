@@ -10,7 +10,7 @@ const onLogout = () => {
 const Nav = () => (
   <Menu id="navbar">
     <Container>
-      <Menu.Item as="a" header href="/home">
+      <Menu.Item header>
         <Image
           size="small"
           src={logo}
