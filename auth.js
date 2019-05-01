@@ -61,7 +61,7 @@ module.exports = function(app) {
       //console.log(data);
       currentUser = data;
 
-      console.log('Current User ', currentUser);
+      console.log('Current User: ', currentUser);
     if (!currentUser) {
       return res.status(400).json({message: "none"});
     }

@@ -57,8 +57,8 @@ class Home extends Component {
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => {
-    this.setState({ modalOpen: false })
-    console.log("modal closed")
+    this.setState({ modalOpen: false });
+    console.log("modal closed");
   }
 
   handleSubmit = () => {
@@ -142,6 +142,7 @@ class Home extends Component {
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
                 handleOpen={this.handleOpen}
+                handleClose={this.handleClose}
               />
             </Grid.Column>
           </Grid.Row>
