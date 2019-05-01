@@ -21,8 +21,8 @@ const btnStyle = {
 
 const Banner = () => (
     <Segment style={bannerStyle}>
-        <Grid>
-            <Grid.Row stackable columns={3}>
+        <Grid stackable>
+            <Grid.Row columns={3}>
                 <Grid.Column width={4}>
                     <Image
                         centered
@@ -30,12 +30,14 @@ const Banner = () => (
                         src={Logo}
                     />
                 </Grid.Column>
-                <Grid.Column width={8}>
+                <Grid.Column textAlign='center' width={8}>
                     <h1>Care about your security?</h1>
                     <h2>So do we.</h2>
                     <h3><Icon name='lock'/>Passcode protected, worry-free info storage with Atlas</h3>
+                    <br/>
+                    <a href='#main-logo'><Icon name='angle double down' size='large' /></a>
                 </Grid.Column>
-                <Grid.Column width={4}>
+                <Grid.Column textAlign='center' width={4}>
                     <div>
                         <a href='#main-logo'><Button style={btnStyle} color='green'>Get Started</Button></a>
                     </div>
