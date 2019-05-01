@@ -19,6 +19,7 @@ import {
     Switch, 
     Redirect
 } from "react-router-dom";
+import swal from "sweetalert";
 
 //var md5 = require('md5');
 
@@ -55,19 +56,19 @@ class Login extends Component {
             //     });
             // }
             const loginData = { email: this.state.email, password: this.state.password };
-            console.log(loginData);
+            //console.log(loginData);
         axios.post('/api/login', loginData)
             .then(response => {
-                console.log('RESPONSE: ', response);
+                console.log('RESPONSE status: ', response.status);
                 let backEndRes = response.data;
                 console.log("Back End Response", backEndRes);
-                
+                console.log('message: ', backEndRes.message);
                 if (backEndRes.message === "none") {
-                    alert("That email does not exist. If you don't have an Account, sign up!");
+                    swal("Sorry!", "That email does not exist. If you don't have an Account, sign up!", "error");
                 
                 }
                 else if (backEndRes.message === "Invalid Password/Username") {
-                    alert("Invalid email/password");
+                    swal("Oops!", "Invalid email/password combination", "warning");
                 }
                 else{
                     console.log("User is logged in")
@@ -75,11 +76,11 @@ class Login extends Component {
                     console.log('login.js userId: ', backEndRes.userID);
                     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
                     this.setState({loggedIn: true});
-                    window.location.reload()
+                    //window.location.reload()
                 }  
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.status);
             })
     };
 
