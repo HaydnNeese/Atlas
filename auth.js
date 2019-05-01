@@ -43,8 +43,7 @@ module.exports = function(app) {
       password: md5(req.body.password), 
       email: req.body.email,
       phone: req.body.phone,
-      question: req.body.question,
-      answer: req.body.answer
+      pin: req.body.pin
     });
     
     testdata.save(function(err, data) {

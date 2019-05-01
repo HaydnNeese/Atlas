@@ -12,8 +12,7 @@ var UserSchema = new Schema({
         unique: true
     },
     phone: String,
-    question: String,
-    answer: String,
+    pin: String,
         
     modals: [
         {

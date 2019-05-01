@@ -16,13 +16,13 @@ const divStyle = {
     paddingTop: '90px',
 };
 
-const options = [
-    { key: '1', text: 'Security question example (drop down for info)', value: 'q1' },
-    { key: '2', text: 'For now lets have a single question', value: 'q2' },
-    { key: '3', text: 'Theyll use the question for all card access', value: 'q3' },
-    { key: '4', text: 'So we can get MVP functionality in the 2 weeks', value: 'q4' },
-    { key: '5', text: 'Then phone alerts then random security questions', value: 'q5' }
-]
+// const options = [
+//     { key: '1', text: 'Security question example (drop down for info)', value: 'q1' },
+//     { key: '2', text: 'For now lets have a single question', value: 'q2' },
+//     { key: '3', text: 'Theyll use the question for all card access', value: 'q3' },
+//     { key: '4', text: 'So we can get MVP functionality in the 2 weeks', value: 'q4' },
+//     { key: '5', text: 'Then phone alerts then random security questions', value: 'q5' }
+// ]
 
 class Signup extends Component {
     state = {
@@ -30,8 +30,7 @@ class Signup extends Component {
         password: "",
         phone: "",
         email: "",
-        question: "",
-        answer: ""
+        pin: ""
     }
 
     handleChange = event => {
