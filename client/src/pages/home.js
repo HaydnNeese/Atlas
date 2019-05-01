@@ -10,7 +10,7 @@ import API from "../utils/api";
 import swal from "sweetalert";
 
 const homeBG = {
-  background: "linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)"
+  // background: "linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)"
 }
 
 const divStyle = {
