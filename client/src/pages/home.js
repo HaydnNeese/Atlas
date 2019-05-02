@@ -8,6 +8,8 @@ import AddModal from '../components/AddModal';
 import Banner from '../components/Banner';
 import API from "../utils/api";
 import swal from "sweetalert";
+import Axios from "axios";
+//import sendEmail from '../../../send-email';
 
 const homeBG = {
   // background: "linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)"
@@ -38,7 +40,8 @@ class Home extends Component {
     modalOpen: false,
     clicked: false,
     selectedCardId: "",
-    userPin: ""
+    userPin: "",
+    email: ""
   };
 
   handleChange = event => {
@@ -48,11 +51,11 @@ class Home extends Component {
   componentDidMount() {
     const id = localStorage.getItem("userId").replace(/"/g, "");
     const userPin = localStorage.getItem("pin").replace(/"/g, "");
-    console.log('front end user pin: ', userPin);
+    const email = localStorage.getItem("email").replace(/"/g, "");
     this.setState({
-      userPin
+      userPin,
+      email
     })
-    console.log('this is id in home.js: ', id);
     this.loadModals(id);
   }
 
@@ -67,7 +70,6 @@ class Home extends Component {
 
   handleClose = () => {
     this.setState({ modalOpen: false });
-    console.log("modal closed");
   }
 
   handleSubmit = () => {
@@ -99,6 +101,15 @@ class Home extends Component {
     event.preventDefault();
     if (this.state.answer === this.state.userPin) {
       swal("User Verified", "", "success");
+      let userEmail = this.state.email;
+      //console.log('front end user email', userEmail);
+      Axios.post('/api/email', userEmail)
+        .then(response => {
+          console.log('email response: ', response);
+        })
+        .catch(err => {
+          console.log('email error: ', err);
+        })
       this.setState({
         isCorrect: true
       });

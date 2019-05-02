@@ -40,8 +40,8 @@ class Login extends Component {
 
     handleLogin = (e) => {
         e.preventDefault();
-        const token = localStorage.getItem("token");
-        console.log('this is front end token: ', token);
+        //const token = localStorage.getItem("token");
+        //console.log('this is front end token: ', token);
         localStorage.removeItem("token");
             // const response = await function() { 
             //     fetch('/api/login', {
@@ -59,10 +59,7 @@ class Login extends Component {
             //console.log(loginData);
         axios.post('/api/login', loginData)
             .then(response => {
-                console.log('RESPONSE status: ', response.status);
-                let backEndRes = response.data;
-                console.log("Back End Response", backEndRes);
-                console.log('message: ', backEndRes.message);
+                let backEndRes = response.data;             
                 if (backEndRes.message === "none") {
                     swal("Sorry!", "If you don't have an Atlas account, sign up below", "error");
                 
@@ -71,9 +68,10 @@ class Login extends Component {
                     swal("Oops!", "Invalid email/password combination", "warning");
                 }
                 else{
-                    console.log("User is logged in")
+                    console.log("User is logged in", backEndRes)
                     localStorage.setItem("token", JSON.stringify(backEndRes.token));
                     localStorage.setItem("pin", JSON.stringify(backEndRes.data.pin));
+                    localStorage.setItem("email", JSON.stringify(backEndRes.data.email));
                     console.log('login.js userId: ', backEndRes.userID);
                     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
                     this.setState({loggedIn: true});

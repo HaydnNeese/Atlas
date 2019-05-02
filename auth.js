@@ -13,9 +13,7 @@ const SECRET = "TOKENKEY";
 
 module.exports = function(app) {
 
-
 // ----------- post for original signup -----------
-
 
   app.post('/api/world', (req, res) => {
     console.log(req.body);
@@ -42,7 +40,7 @@ module.exports = function(app) {
       //console.log(data);
       currentUser = data;
 
-      console.log('AuthJS Current User: ', currentUser);
+      //console.log('AuthJS Current User: ', currentUser);
     if (!currentUser) {
       return res.json({message: "none"});
     }
