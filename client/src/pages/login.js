@@ -40,8 +40,8 @@ class Login extends Component {
 
     handleLogin = (e) => {
         e.preventDefault();
-        const token = localStorage.getItem("token");
-        console.log('this is front end token: ', token);
+        //const token = localStorage.getItem("token");
+        //console.log('this is front end token: ', token);
         localStorage.removeItem("token");
             // const response = await function() { 
             //     fetch('/api/login', {
@@ -59,21 +59,19 @@ class Login extends Component {
             //console.log(loginData);
         axios.post('/api/login', loginData)
             .then(response => {
-                console.log('RESPONSE status: ', response.status);
-                let backEndRes = response.data;
-                console.log("Back End Response", backEndRes);
-                console.log('message: ', backEndRes.message);
+                let backEndRes = response.data;             
                 if (backEndRes.message === "none") {
-                    swal("Sorry!", "That email does not exist. If you don't have an Account, sign up!", "error");
+                    swal("Sorry!", "If you don't have an Atlas account, sign up below", "error");
                 
                 }
                 else if (backEndRes.message === "Invalid Password/Username") {
                     swal("Oops!", "Invalid email/password combination", "warning");
                 }
                 else{
-                    console.log("User is logged in")
+                    console.log("User is logged in", backEndRes)
                     localStorage.setItem("token", JSON.stringify(backEndRes.token));
                     localStorage.setItem("pin", JSON.stringify(backEndRes.data.pin));
+                    localStorage.setItem("email", JSON.stringify(backEndRes.data.email));
                     console.log('login.js userId: ', backEndRes.userID);
                     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
                     this.setState({loggedIn: true});
@@ -138,7 +136,7 @@ class Login extends Component {
                             </Form>
                         </Segment>
                         <Message>
-                            Not registered yet? <a href="/signup">Sign Up</a>
+                            Don't have an account yet? <a href="/signup">Sign Up</a>
                         </Message>
                     </Grid.Column>
                     <Steps />
