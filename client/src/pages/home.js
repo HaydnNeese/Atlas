@@ -20,8 +20,7 @@ const divStyle = {
 
 const securityArray = [
   {
-    question: "2 + 2 = 4, true or false?",
-    answer: "true" || "True"
+    question: "Enter your PIN to unlock content",
   }
 ]
 
@@ -37,7 +36,9 @@ class Home extends Component {
     answer: '',
     noteTotal: 0,
     modalOpen: false,
-    clicked: false
+    clicked: false,
+    selectedCardId: "",
+    userPin: ""
   };
 
   handleChange = event => {
@@ -46,7 +47,11 @@ class Home extends Component {
 
   componentDidMount() {
     const id = localStorage.getItem("userId").replace(/"/g, "");
-
+    const userPin = localStorage.getItem("pin").replace(/"/g, "");
+    console.log('front end user pin: ', userPin);
+    this.setState({
+      userPin
+    })
     console.log('this is id in home.js: ', id);
     this.loadModals(id);
   }
@@ -73,17 +78,16 @@ class Home extends Component {
               title: this.state.title,
               note: this.state.note
             }).then(data => {
-              console.log('DATA from the backend: ', data);
+              
               this.handleClose()
             })
-
   window.location.reload();
-  
 }
 
-  handleLockButtonClick = () => {
+  handleLockButtonClick = (id) => {
     this.setState({
-      locked: false
+      locked: false,
+      selectedCardId: id
     })
   }
 
@@ -93,20 +97,20 @@ class Home extends Component {
 
   handleAnswerSubmit = event => {
     event.preventDefault();
-    if (this.state.answer === securityArray[0].answer) {
-      swal("Correct!", "You may enter...", "success");
+    if (this.state.answer === this.state.userPin) {
+      swal("User Verified", "", "success");
       this.setState({
         isCorrect: true
       });
       document.getElementById('secure-input').value='';
     }else if(this.state.answer === "") {
-      swal("You forgot to put an answer!", "You must answer the question before entering submit.", "warning");
+      swal("Error", "Enter your PIN to gain access", "warning");
       document.getElementById('secure-input').value='';
     }else {
-      swal("You put the wrong answer!", "Try again, you only get three chances", "error");
-      this.setState({
-        attempts: this.state.attempts - 1
-      });
+      swal("Unable to Verify User", "", "error");
+      // this.setState({
+      //   attempts: this.state.attempts - 1
+      // });
       document.getElementById('secure-input').value='';
     }
   }
@@ -146,7 +150,7 @@ class Home extends Component {
               return (
               <GridColumn>
                 <LockedCard
-                  handleLockButtonClick={this.handleLockButtonClick}
+                  handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
                   title = {card.title}
                   notes = {this.state.noteTotal}
                 />
@@ -160,10 +164,21 @@ class Home extends Component {
                   {this.state.modal.map((card) => {
                     return (
                       <GridColumn>
+                        {
+                          this.state.selectedCardId === card._id &&
                         <PassCard
                           title={card.title}
                           note={card.note}
                         />
+                        }
+                        {
+                            this.state.selectedCardId === card._id || 
+                            <LockedCard
+                            handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
+                            title = {card.title}
+                            notes = {this.state.noteTotal}
+                            />
+                          }
                       </GridColumn>
                     )
                   })}
@@ -173,6 +188,8 @@ class Home extends Component {
                     {this.state.modal.map((card) => {
                       return (
                         <GridColumn>
+                          { 
+                            this.state.selectedCardId === card._id &&
                           <SecurityCard
                             handleAnswerInput={this.handleAnswerInput}
                             title = {card.title}
@@ -182,6 +199,15 @@ class Home extends Component {
                             question={securityArray[0].question}
                             attempts = {this.state.attempts}
                           />
+                          }
+                          {
+                            this.state.selectedCardId === card._id || 
+                            <LockedCard
+                            handleLockButtonClick={this.handleLockButtonClick}
+                            title = {card.title}
+                            notes = {this.state.noteTotal}
+                            />
+                          }
                         </GridColumn>
                       )
                     })}

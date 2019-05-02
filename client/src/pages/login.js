@@ -73,6 +73,7 @@ class Login extends Component {
                 else{
                     console.log("User is logged in")
                     localStorage.setItem("token", JSON.stringify(backEndRes.token));
+                    localStorage.setItem("pin", JSON.stringify(backEndRes.data.pin));
                     console.log('login.js userId: ', backEndRes.userID);
                     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
                     this.setState({loggedIn: true});

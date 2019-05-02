@@ -26,7 +26,7 @@ export const LockedCard = props => (
   <Card centered>
     <Image className="card-header" src={props.image} />
     <Card.Content header={props.title} />
-    <Card.Content className="card-center" description="Click the lock to answer a question and unlock this cards information" />
+    <Card.Content className="card-center" description="Click the lock to gain access" />
     <button id="lock-btn" className="ui primary button lock-button" onClick={props.handleLockButtonClick}><i className="fas fa-lock"></i></button>
     <Card.Content className="dark" extra>
       <Icon name='clipboard' />
@@ -42,7 +42,7 @@ export const SecurityCard = props => (
     <Card.Content className="card-header" header={props.title} />
     <Card.Content className="card-center">
       <Form>
-        <Form.Input id="secure-input" onChange={props.handleAnswerInput} label={props.question} placeholder='Answer goes here' />
+        <Form.Input id="secure-input" onChange={props.handleAnswerInput} label={props.question} placeholder='PIN' />
         <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
       </Form>
     </Card.Content>
