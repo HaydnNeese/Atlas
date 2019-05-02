@@ -4,6 +4,7 @@ import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
 import NoMatch from './pages/nomatch';
+import Forgot from './pages/forgot';
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -21,6 +22,7 @@ function App() {
           <Route exact path='/' component={() => <Login/>} />
           <Route exact path='/signup' component={() => <Signup/>} />
           <Route exact path='/home' component={() => <Home/>} />
+          <Route exact path='/forgot' component={() => <Forgot/>} />
           <Route component={NoMatch} />
         </Switch>
       </div>

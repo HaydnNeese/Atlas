@@ -13,6 +13,8 @@ var UserSchema = new Schema({
     },
     phone: String,
     pin: String,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
         
     modals: [
         {
