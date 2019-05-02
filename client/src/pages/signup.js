@@ -55,7 +55,8 @@ class Signup extends Component {
             fieldValidationErrors.username = usernameValid ? '': ' must be at least 4 characters';
             break;
           case 'phone':
-            phoneValid = value.match(/\d/g).length===10;
+            phoneValid = value.match(/\d/g)
+            phoneValid = phoneValid && phoneValid.length===10
             fieldValidationErrors.phone = phoneValid ? '': ' numbers should be entered with only digits';
             break;
           case 'pin':
