@@ -5,7 +5,7 @@ var md5 = require('md5');
 const jwt=require('jsonwebtoken');
 const moment=require('moment');
 const checkPW = (newPW, dbPassword) => {
-  console.log(newPW, dbPassword);
+  //console.log(newPW, dbPassword);
   return (newPW === dbPassword);
 };
 
@@ -16,7 +16,7 @@ module.exports = function(app) {
 // ----------- post for original signup -----------
 
   app.post('/api/world', (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     var testdata = new User({
       username: req.body.username,
       password: md5(req.body.password), 
