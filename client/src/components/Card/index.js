@@ -42,7 +42,7 @@ export const SecurityCard = props => (
     <Card.Content className="card-header" header={props.title} />
     <Card.Content className="card-center">
       <Form>
-        <Form.Input id="secure-input" onChange={props.handleAnswerInput} label={props.question} placeholder='PIN' />
+        <Form.Input id="secure-input" type="password" onChange={props.handleAnswerInput} label={props.question} placeholder='PIN' />
         <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
       </Form>
     </Card.Content>

@@ -48,19 +48,19 @@ class Signup extends Component {
             break;
           case 'password':
             passwordValid = value.length >= 6 && value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/);
-            fieldValidationErrors.password = passwordValid ? '': ' must contain 1 capital, 1 lowercase and a number';
+            fieldValidationErrors.password = passwordValid ? '': ' must be at least 8 characters and contain 1 capital, 1 lowercase, a number';
             break;
           case 'username':
             usernameValid = value.length >= 4;
-            fieldValidationErrors.username = usernameValid ? '': ' is too short';
+            fieldValidationErrors.username = usernameValid ? '': ' must be at least 4 characters';
             break;
           case 'phone':
             phoneValid = value.match(/\d/g).length===10;
-            fieldValidationErrors.phone = phoneValid ? '': ' is invalid. Phone numbers should be entered with only digits.';
+            fieldValidationErrors.phone = phoneValid ? '': ' numbers should be entered with only digits';
             break;
           case 'pin':
             pinValid = value.length >= 6;
-            fieldValidationErrors.pin = pinValid ? '': ' is too short. Pin must consist of at least 6 digits.';
+            fieldValidationErrors.pin = pinValid ? '': ' must consist of at least 6 digits';
             break;
           default:
             break;
@@ -193,9 +193,12 @@ class Signup extends Component {
                                     />
                                 </Form.Field>
                                 {/* This is where our errors will be displayed */}
-                                <FormErrors textAlign="center" formErrors={this.state.formErrors}/>
+                                <Header as="h4" textAlign="center" color="red">
+                                <FormErrors formErrors={this.state.formErrors}/>
+                                </Header>
+                                
                                 <Button type="submit" color="blue" value="Submit" fluid size="large" onClick={this.handleSubmit} disabled={!this.state.formValid}>
-                                    Submit
+                                    Create Account
                                 </Button>
                             </Form>
                         </Segment>

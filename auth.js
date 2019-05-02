@@ -12,26 +12,7 @@ const checkPW = (newPW, dbPassword) => {
 const SECRET = "TOKENKEY";
 
 module.exports = function(app) {
-//   app.use(function(req, res, next) {
-//     try {
-//       const token= (req.header("Authorization") || "").replace(/\"/g);
-//       if (!token) return next();
-      
-//       jwt.verify(token, SECRET, (err, payload) => {
-//         if (err) {
-//           console.log(err, payload);
-//           return next();
-//         }
-//       })
-//       console.log('PAYLOAD: ', payload);
-//       User.findById(payload.userId).then(doc => {
-//         req.user = doc;
-//         next();
-//       });
-//     }catch(e){
-//       next()
-//   }
-// });
+
 
 // ----------- post for original signup -----------
 

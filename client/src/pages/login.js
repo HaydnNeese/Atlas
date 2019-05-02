@@ -64,7 +64,7 @@ class Login extends Component {
                 console.log("Back End Response", backEndRes);
                 console.log('message: ', backEndRes.message);
                 if (backEndRes.message === "none") {
-                    swal("Sorry!", "That email does not exist. If you don't have an Account, sign up!", "error");
+                    swal("Sorry!", "If you don't have an Atlas account, sign up below", "error");
                 
                 }
                 else if (backEndRes.message === "Invalid Password/Username") {
@@ -138,7 +138,7 @@ class Login extends Component {
                             </Form>
                         </Segment>
                         <Message>
-                            Not registered yet? <a href="/signup">Sign Up</a>
+                            Don't have an account yet? <a href="/signup">Sign Up</a>
                         </Message>
                     </Grid.Column>
                     <Steps />

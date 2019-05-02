@@ -61,7 +61,7 @@ const Footer = () => (
                             <List.Icon name='github' size='large' verticalAlign='middle' />
                             <List.Content>
                                 <List.Header>Don Wasinger</List.Header>
-                                <List.Description>Dead weight tbh</List.Description>
+                                <List.Description>Authentication, Validation, and Security</List.Description>
                             </List.Content>
                         </List.Item>
                         <List.Item href="https://github.com/jstone074">
