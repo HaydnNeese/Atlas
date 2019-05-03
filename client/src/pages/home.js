@@ -20,11 +20,8 @@ const divStyle = {
   // background: 'linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)'
 };
 
-const securityArray = [
-  {
-    question: "Enter your PIN to unlock content",
-  }
-]
+let pinArray = [];
+let placeholderArray = [];
 
 class Home extends Component {
 
@@ -56,13 +53,15 @@ class Home extends Component {
       userPin,
       email
     })
+    console.log(this.state.userPin);
     this.loadModals(id);
   }
 
   loadModals = (id) => {
     API.getModal(id)
-      .then(res  => { this.setState({ modal: res.data.modals });
-     })
+      .then(res => {
+        this.setState({ modal: res.data.modals });
+      })
       .catch(err => console.log(err));
   }
 
@@ -74,17 +73,17 @@ class Home extends Component {
 
   handleSubmit = () => {
     const id = localStorage.getItem("userId").replace(/"/g, "");
-   
-          API.addModal( id,
-            {
-              title: this.state.title,
-              note: this.state.note
-            }).then(data => {
-              
-              this.handleClose()
-            })
-  window.location.reload();
-}
+
+    API.addModal(id,
+      {
+        title: this.state.title,
+        note: this.state.note
+      }).then(data => {
+
+        this.handleClose()
+      })
+    window.location.reload();
+  }
 
   handleLockButtonClick = (id) => {
     this.setState({
@@ -94,149 +93,157 @@ class Home extends Component {
   }
 
   handleAnswerInput = event => {
-    this.setState({ answer: event.target.value });
+    pinArray.push(event.target.value);
+    pinArray.push("*");
   }
 
   handleAnswerSubmit = event => {
     event.preventDefault();
-    if (this.state.answer === this.state.userPin) {
-      swal("User Verified", "", "success");
-      let userEmail = this.state.email;
-      //console.log('front end user email', userEmail);
-      Axios.post('/api/email', userEmail)
-        .then(response => {
-          console.log('email response: ', response);
-        })
-        .catch(err => {
-          console.log('email error: ', err);
-        })
-      this.setState({
-        isCorrect: true
-      });
-      document.getElementById('secure-input').value='';
-    }else if(this.state.answer === "") {
-      swal("Error", "Enter your PIN to gain access", "warning");
-      document.getElementById('secure-input').value='';
-    }else {
-      swal("Unable to Verify User", "", "error");
-      // this.setState({
-      //   attempts: this.state.attempts - 1
-      // });
-      document.getElementById('secure-input').value='';
-    }
+    let pinString = pinArray.join('');
+    this.setState({ answer: pinString }, () => {
+      if (this.state.answer === this.state.userPin) {
+        swal("User Verified", "", "success");
+        let userEmail = this.state.email;
+        //console.log('front end user email', userEmail);
+        Axios.post('/api/email', userEmail)
+          .then(response => {
+            console.log('email response: ', response);
+          })
+          .catch(err => {
+            console.log('email error: ', err);
+          })
+        this.setState({
+          isCorrect: true
+        });
+        pinArray = [];
+      } else if (this.state.answer === "") {
+        swal("Error", "Enter your PIN to gain access", "warning");
+        pinArray = [];
+      } else {
+        swal("Unable to Verify User", "", "error");
+        // this.setState({
+        //   attempts: this.state.attempts - 1
+        // });
+        pinArray = [];
+      }
+    });
+    // console.log(`PIN: ${this.state.userPin}`);
+    // console.log(`Array: ${pinString}`);
+
   }
+
+  //PIN logic
 
   render() {
     return (
-    <div style={homeBG}>
-      <Banner />
-      <Container>
-        <Grid stackable style={divStyle} textAlign='center'>
-          <Grid.Row>
-            <Grid.Column>
-              <Image
-                id="main-logo"
-                centered
-                size="medium"
-                src={titleLogo}
-              />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <AddModal
-                title={this.state.title}
-                note={this.state.note}
-                open={this.state.modalOpen}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-                handleOpen={this.handleOpen}
-                handleClose={this.handleClose}
-              />
-            </Grid.Column>
-          </Grid.Row>
-          {this.state.locked ? (
-            <Grid.Row stackable columns={3}>
-            {this.state.modal.map((card) => {
-              return (
-              <GridColumn>
-                <LockedCard
-                  handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
-                  title = {card.title}
-                  notes = {this.state.noteTotal}
+      <div style={homeBG}>
+        <Banner />
+        <Container>
+          <Grid stackable style={divStyle} textAlign='center'>
+            <Grid.Row>
+              <Grid.Column>
+                <Image
+                  id="main-logo"
+                  centered
+                  size="medium"
+                  src={titleLogo}
                 />
-              </GridColumn>
-              )
-            })}
+              </Grid.Column>
             </Grid.Row>
-          ) : (
-              this.state.isCorrect ? (
-                <Grid.Row stackable columns={3}>
-                  {this.state.modal.map((card) => {
-                    return (
-                      <GridColumn>
-                        {
-                          this.state.selectedCardId === card._id &&
-                        <PassCard
-                          title={card.title}
-                          note={card.note}
-                        />
-                        }
-                        {
-                            this.state.selectedCardId === card._id || 
-                            <LockedCard
-                            handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
-                            title = {card.title}
-                            notes = {this.state.noteTotal}
-                            />
-                          }
-                      </GridColumn>
-                    )
-                  })}
-                </Grid.Row>
-              ) : (
+            <Grid.Row>
+              <Grid.Column>
+                <AddModal
+                  title={this.state.title}
+                  note={this.state.note}
+                  open={this.state.modalOpen}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                  handleOpen={this.handleOpen}
+                  handleClose={this.handleClose}
+                />
+              </Grid.Column>
+            </Grid.Row>
+            {this.state.locked ? (
+              <Grid.Row stackable columns={3}>
+                {this.state.modal.map((card) => {
+                  return (
+                    <GridColumn key={card._id}>
+                      <LockedCard
+                        handleLockButtonClick={() => { this.handleLockButtonClick(card._id) }}
+                        title={card.title}
+                        notes={this.state.noteTotal}
+                      />
+                    </GridColumn>
+                  )
+                })}
+              </Grid.Row>
+            ) : (
+                this.state.isCorrect ? (
                   <Grid.Row stackable columns={3}>
                     {this.state.modal.map((card) => {
                       return (
-                        <GridColumn>
-                          { 
+                        <GridColumn key={card._id}>
+                          {
                             this.state.selectedCardId === card._id &&
-                          <SecurityCard
-                            handleAnswerInput={this.handleAnswerInput}
-                            title = {card.title}
-                            name="answer"
-                            value={this.state.answer}
-                            handleAnswerSubmit={this.handleAnswerSubmit}
-                            question={securityArray[0].question}
-                            attempts = {this.state.attempts}
-                          />
+                            <PassCard
+                              title={card.title}
+                              note={card.note}
+                            />
                           }
                           {
-                            this.state.selectedCardId === card._id || 
+                            this.state.selectedCardId === card._id ||
                             <LockedCard
-                            handleLockButtonClick={this.handleLockButtonClick}
-                            title = {card.title}
-                            notes = {this.state.noteTotal}
+                              handleLockButtonClick={() => { this.handleLockButtonClick(card._id) }}
+                              title={card.title}
+                              notes={this.state.noteTotal}
                             />
                           }
                         </GridColumn>
                       )
                     })}
                   </Grid.Row>
+                ) : (
+                    <Grid.Row stackable columns={3}>
+                      {this.state.modal.map((card) => {
+                        return (
+                          <GridColumn key={card._id}>
+                            {
+                              this.state.selectedCardId === card._id &&
+                              <SecurityCard
+                                handleAnswerInput={this.handleAnswerInput}
+                                title={card.title}
+                                name="answer"
+                                value={card.value}
+                                handleAnswerSubmit={this.handleAnswerSubmit}
+                                attempts={this.state.attempts}
+                              />
+                            }
+                            {
+                              this.state.selectedCardId === card._id ||
+                              <LockedCard
+                                handleLockButtonClick={this.handleLockButtonClick}
+                                title={card.title}
+                                notes={this.state.noteTotal}
+                              />
+                            }
+                          </GridColumn>
+                        )
+                      })}
+                    </Grid.Row>
                   )
               )}
-        </Grid>
-      </Container>
-    </div>
-        );
-      }
-    }
-    //we need to have it read the total number of stored cards
-    //on each card it should show the LockedCard component
-    //click on the lock to reveal the SecurityCard component
-    //then have the SecurityCard receive the stored security question and display it to the card
-    //capture the answer and compare it with the stored answer
-    //if it is correct then reveal the PassCard and maybe use the success tool that Semantic UI has
-    //if it is incorrect use the incorrect tool that semantic UI has and have the total number of tries reduce by 1
-    //after three failed tries have it lock the user out (optional)
-    export default Home;
+          </Grid>
+        </Container>
+      </div>
+    );
+  }
+}
+//we need to have it read the total number of stored cards
+//on each card it should show the LockedCard component
+//click on the lock to reveal the SecurityCard component
+//then have the SecurityCard receive the stored security question and display it to the card
+//capture the answer and compare it with the stored answer
+//if it is correct then reveal the PassCard and maybe use the success tool that Semantic UI has
+//if it is incorrect use the incorrect tool that semantic UI has and have the total number of tries reduce by 1
+//after three failed tries have it lock the user out (optional)
+export default Home;
