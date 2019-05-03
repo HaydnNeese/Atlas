@@ -55,6 +55,7 @@ export const SecurityCard = props => (
       <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="8">8</button>
       <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="9">9</button>
     </div>
+
         <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
       </Form>
     </Card.Content>

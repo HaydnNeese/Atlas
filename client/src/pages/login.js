@@ -43,18 +43,7 @@ class Login extends Component {
         //const token = localStorage.getItem("token");
         //console.log('this is front end token: ', token);
         localStorage.removeItem("token");
-            // const response = await function() { 
-            //     fetch('/api/login', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         }, 
-            //         body: JSON.stringify({
-            //             email: this.state.email,
-            //             password: this.state.password
-            //         })
-            //     });
-            // }
+            
             const loginData = { email: this.state.email, password: this.state.password };
             //console.log(loginData);
         axios.post('/api/login', loginData)
@@ -68,14 +57,13 @@ class Login extends Component {
                     swal("Oops!", "Invalid email/password combination", "warning");
                 }
                 else{
-                    console.log("User is logged in", backEndRes)
                     localStorage.setItem("token", JSON.stringify(backEndRes.token));
                     localStorage.setItem("pin", JSON.stringify(backEndRes.data.pin));
                     localStorage.setItem("email", JSON.stringify(backEndRes.data.email));
                     console.log('login.js userId: ', backEndRes.userID);
                     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
                     this.setState({loggedIn: true});
-                    //window.location.reload()
+                    window.location.reload()
                 }  
             })
             .catch(err => {
@@ -129,7 +117,7 @@ class Login extends Component {
                                     onChange={this.handleChange}
                                     type="password"
                                 />
-
+                                <p>Forgot your password? <a href="/forgot">Click here</a></p>
                                 <Button type="submit" color="blue" fluid size="large" onClick={this.handleLogin}>
                                     Login
                                 </Button>
