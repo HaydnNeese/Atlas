@@ -129,7 +129,7 @@ class Login extends Component {
                                     onChange={this.handleChange}
                                     type="password"
                                 />
-
+                                <p>Forgot your password? <a href="/forgot">Click here</a></p>
                                 <Button type="submit" color="blue" fluid size="large" onClick={this.handleLogin}>
                                     Login
                                 </Button>
