@@ -17,5 +17,5 @@ export default {
         return axios.post("/api/modal/" + id , data);
     }
 
-
+    //make an edit modal and delete modal thing
 };

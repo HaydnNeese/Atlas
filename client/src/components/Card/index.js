@@ -41,8 +41,21 @@ export const SecurityCard = props => (
     <Image src={props.image} />
     <Card.Content className="card-header" header={props.title} />
     <Card.Content className="card-center">
+    <p>Click the buttons to enter a 4-digit PIN.</p>
+    <span>_ _ _ _ _ _</span>
       <Form>
-        <Form.Input id="secure-input" type="password" textAlign={"center"} onChange={props.handleAnswerInput} label={props.question} placeholder='PIN' />
+      <div id="pinpad" className="btn-group btn-matrix mb-3" >
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="1">1</button>
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="2">2</button>
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="3">3</button>
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="4">4</button>
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="5">5</button>
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="6">6</button>
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="7">7</button>
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="8">8</button>
+      <button  onClick={props.handleAnswerInput} className="btn btn-dark" value="9">9</button>
+    </div>
+
         <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
       </Form>
     </Card.Content>

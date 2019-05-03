@@ -22,3 +22,32 @@
 #submit-btn {
     background-color: #bcff9d;
 }
+
+
+.btn-matrix { 
+    width: 10rem;
+    height: 10rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn-matrix > .btn {
+    width: 33.3%;
+    height: 33.3%;
+    border: 1px solid #e9ecef;
+    border-radius: 25px;
+    padding: 10px;
+  }
+  
+  .btn-matrix > .btn:first-child, .btn-matrix > .btn:last-child {
+    border-radius: 25;
+    padding: 10px;
+  }
+  
+  .btn-matrix .btn + .btn {
+    margin-left: 0;
+  }
+
+  #pinpad {
+    margin: auto;
+    padding: 5px;
+  }
