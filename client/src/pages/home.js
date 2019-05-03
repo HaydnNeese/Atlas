@@ -32,7 +32,6 @@ class Home extends Component {
     title: "",
     note: "",
     modal: [],
-    attempts: 3,
     isCorrect: false,
     locked: true,
     answer: '',
@@ -74,19 +73,18 @@ class Home extends Component {
 
   handleSubmit = () => {
     const id = localStorage.getItem("userId").replace(/"/g, "");
-   
           API.addModal( id,
             {
               title: this.state.title,
               note: this.state.note
             }).then(data => {
-              
               this.handleClose()
             })
   window.location.reload();
 }
 
   handleLockButtonClick = (id) => {
+
     this.setState({
       locked: false,
       selectedCardId: id
@@ -102,7 +100,6 @@ class Home extends Component {
     if (this.state.answer === this.state.userPin) {
       swal("User Verified", "", "success");
       let userEmail = this.state.email;
-      //console.log('front end user email', userEmail);
       Axios.post('/api/email', userEmail)
         .then(response => {
           console.log('email response: ', response);
@@ -119,9 +116,6 @@ class Home extends Component {
       document.getElementById('secure-input').value='';
     }else {
       swal("Unable to Verify User", "", "error");
-      // this.setState({
-      //   attempts: this.state.attempts - 1
-      // });
       document.getElementById('secure-input').value='';
     }
   }
@@ -172,7 +166,9 @@ class Home extends Component {
           ) : (
               this.state.isCorrect ? (
                 <Grid.Row stackable columns={3}>
+              
                   {this.state.modal.map((card) => {
+                    console.log('is correct card mapping: ', card);
                     return (
                       <GridColumn>
                         {
@@ -180,10 +176,11 @@ class Home extends Component {
                         <PassCard
                           title={card.title}
                           note={card.note}
+                          handleEditClick = {this.handleEditClick}
                         />
                         }
                         {
-                            this.state.selectedCardId === card._id || 
+                            this.state.selectedCardId !== card._id && 
                             <LockedCard
                             handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
                             title = {card.title}
@@ -197,6 +194,7 @@ class Home extends Component {
               ) : (
                   <Grid.Row stackable columns={3}>
                     {this.state.modal.map((card) => {
+                      console.log('card: ',card);
                       return (
                         <GridColumn>
                           { 
@@ -209,12 +207,13 @@ class Home extends Component {
                             handleAnswerSubmit={this.handleAnswerSubmit}
                             question={securityArray[0].question}
                             attempts = {this.state.attempts}
+                            selectedCardId = {this.state.selectedCardId}
                           />
                           }
                           {
-                            this.state.selectedCardId === card._id || 
+                            this.state.selectedCardId !== card._id && 
                             <LockedCard
-                            handleLockButtonClick={this.handleLockButtonClick}
+                            handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
                             title = {card.title}
                             notes = {this.state.noteTotal}
                             />
