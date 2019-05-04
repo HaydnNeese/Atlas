@@ -12,7 +12,7 @@ export const PassCard = props => (
       </Card.Meta>
     </Card.Content >
     <Card.Content className="dark" extra>
-      <Button icon className="ui primary button delete-button">
+      <Button icon className="ui primary button delete-button" onClick={props.handleDelete}>
         <Icon color="white" name='trash alternate' />
       </Button>
     </Card.Content>

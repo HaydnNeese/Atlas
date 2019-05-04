@@ -59,6 +59,7 @@ class Home extends Component {
   loadModals = (id) => {
     API.getModal(id)
       .then(res => {
+        //console.log('MODAL DEFINITION: ',res.data.modals);
         this.setState({ modal: res.data.modals });
       })
       .catch(err => console.log(err));
@@ -79,13 +80,15 @@ class Home extends Component {
               note: this.state.note
             }).then(data => {
               this.handleClose()
+              this.loadModals(id)
+              this.setState({
+                title: "",
+                note: ""
+              })
             })
-  window.location.reload();
 }
 
-
   handleLockButtonClick = (id) => {
-
     this.setState({
       locked: false,
       selectedCardId: id
@@ -121,17 +124,27 @@ class Home extends Component {
         pinArray = [];
       } else {
         swal("Unable to Verify User", "", "error");
-        // this.setState({
-        //   attempts: this.state.attempts - 1
-        // });
         pinArray = [];
       }
     });
-    // console.log(`PIN: ${this.state.userPin}`);
-    // console.log(`Array: ${pinString}`);
   }
 
-  //PIN logic
+  // ---------------- delete ----------------
+  handleDelete = modalId => {
+    const id = localStorage.getItem("userId").replace(/"/g, "");
+    swal("Deleting is permanent", "Do you wish to continue?", "warning", {buttons: {
+      cancel: true,
+      confirm: "Confirm"}
+    })
+    .then((cancel) => {
+      if (cancel) {
+        API.delete(modalId)
+        .then(res => {this.loadModals(id)})
+        .catch(err => console.log(err));
+      }
+    })
+  }
+
 
   render() {
     return (
@@ -187,6 +200,7 @@ class Home extends Component {
                             <PassCard
                             title = {card.title}
                             note = {card.note}
+                            handleDelete = {() => {this.handleDelete(card._id)}}
                             />
                           }
                           {
