@@ -57,6 +57,7 @@ class Forgot extends Component {
             })
 
             swal(`Email sent to ${this.state.email}`, "", "success");
+            window.location.href = "/";
     };
 
     render() {
