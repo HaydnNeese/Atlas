@@ -94,12 +94,12 @@ class Home extends Component {
 
   handleAnswerInput = event => {
     pinArray.push(event.target.value);
-    pinArray.push("*");
   }
 
   handleAnswerSubmit = event => {
     event.preventDefault();
     let pinString = pinArray.join('');
+    console.log(pinString)
     this.setState({ answer: pinString }, () => {
       if (this.state.answer === this.state.userPin) {
         swal("User Verified", "", "success");
@@ -149,34 +149,6 @@ class Home extends Component {
                 />
               </Grid.Column>
             </Grid.Row>
-
-          ) : (
-              this.state.isCorrect ? (
-                <Grid.Row stackable columns={3}>
-              
-                  {this.state.modal.map((card) => {
-                    return (
-                      <GridColumn>
-                        {
-                          this.state.selectedCardId === card._id &&
-                        <PassCard
-                          title={card.title}
-                          note={card.note}
-                        />
-                        }
-                        {
-                            this.state.selectedCardId !== card._id && 
-                            <LockedCard
-                            handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
-                            title = {card.title}
-                            notes = {this.state.noteTotal}
-                            />
-                          }
-                      </GridColumn>
-                    )
-                  })}
-                </Grid.Row>
-              ) : (
             <Grid.Row>
               <Grid.Column>
                 <AddModal
@@ -208,31 +180,13 @@ class Home extends Component {
                 this.state.isCorrect ? (
                   <Grid.Row stackable columns={3}>
                     {this.state.modal.map((card) => {
-                      console.log('card: ',card);
                       return (
                         <GridColumn key={card._id}>
                           {
                             this.state.selectedCardId === card._id &&
-                          <SecurityCard
-                            handleAnswerInput={this.handleAnswerInput}
-                            title = {card.title}
-                            name="answer"
-                            value={this.state.answer}
-                            handleAnswerSubmit={this.handleAnswerSubmit}
-                            question={securityArray[0].question}
-                            attempts = {this.state.attempts}
-                            selectedCardId = {this.state.selectedCardId}
-                          />
-                          }
-                          {
-                            this.state.selectedCardId !== card._id && 
-                            <LockedCard
-                            handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
-                            title = {card.title}
-                            notes = {this.state.noteTotal}
                             <PassCard
-                              title={card.title}
-                              note={card.note}
+                            title = {card.title}
+                            note = {card.note}
                             />
                           }
                           {
