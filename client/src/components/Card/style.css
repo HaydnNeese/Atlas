@@ -60,13 +60,19 @@
     color: white;
     font-size: 20px;
   }
+  .btn.btn-dark.styled-btn:focus {
+    outline: none;
+  }
   .btn.btn-dark.styled-btn:hover {
     background-color: #bcff9d;
   }
 
+  #reset-btn {
+  }
   #placeholder-line {
     font-size: 30px;
     margin: 5px;
     height: 40px;
-    border: 2px groove darkblue;
+    background-color: #e9ecef;
+    border-radius: 25px;
   }
