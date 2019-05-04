@@ -77,15 +77,11 @@ class Home extends Component {
               note: this.state.note
             }).then(data => {
               this.handleClose()
-<<<<<<< HEAD
-              this.loadModals(id);
-=======
               this.loadModals(id)
               this.setState({
                 title: "",
                 note: ""
               })
->>>>>>> a6151ccac675aa080db8aa590ed57de016c2802c
             })
 }
 
