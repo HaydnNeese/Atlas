@@ -15,6 +15,7 @@ var db = mongoose.connection;
 require('./auth')(app);
 require('./reset')(app);
 require('./send-email')(app);
+
 //Add routes, both API and view
 app.use(routes);
 

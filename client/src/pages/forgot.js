@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import titleLogo from "../images/atlas-black-logo.png";
+import swal from "sweetalert";
 import {
     Button, 
     Form, 
@@ -35,9 +36,6 @@ class Forgot extends Component {
 
     handleReset = (e) => {
         e.preventDefault();
-        // const token = localStorage.getItem("token");
-        // console.log('this is front end token: ', token);
-        // localStorage.removeItem("token");
 
         const loginData = { email: this.state.email};
         console.log("THIS IS THE LOGIN DATA",loginData);
@@ -47,40 +45,21 @@ class Forgot extends Component {
                 console.log('THIS IS MY RESPONSE: ', response);
                 let backEndRes = response.data;
                 console.log("Back End Response", backEndRes);
-                
-                // if (backEndRes.message === "none") {
-                //     alert("That email does not exist. If you don't have an Account, sign up!");
-                
-                // }
-                // else if (backEndRes.message === "Invalid Password/Username") {
-                //     alert("Invalid email/password");
-                // }
-                // else{
-                //     console.log("User is logged in")
-                //     localStorage.setItem("token", JSON.stringify(backEndRes.token));
-                //     console.log('login.js userId: ', backEndRes.userID);
-                //     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
-                //     this.setState({loggedIn: true});
-                //     window.location.reload()
-                // }  
+
+                if(backEndRes === null) {
+                    swal("No user found", "", "warning");
+               
+                }
+
             })
             .catch(err => {
                 console.log(err);
             })
+
+            swal(`Email sent to ${this.state.email}`, "", "success");
     };
 
     render() {
-        // if (this.state.loggedIn) {
-        //     return(
-        //         <Redirect
-        //             to={{
-        //             pathname: "/home",
-        //             //can pass more data here
-        //             }}
-        //         />
-        //     );
-        // }
-        
         return (
             <Container style={divStyle}>
                 <Grid doubling centered columns={2}>
@@ -112,6 +91,9 @@ class Forgot extends Component {
                         </Segment>
                         <Message>
                             Not registered yet? <a href="/signup">Sign Up</a>
+                        </Message>
+                        <Message>
+                            Already have an account? <a href="/">Login</a>
                         </Message>
                     </Grid.Column>
                     <Steps />

@@ -15,6 +15,9 @@ export default {
         // console.log(`This is the TEST DATA ${data}`);
         
         return axios.post("/api/modal/" + id , data);
+    },
+    resetPassword: function(token, data) {
+        return axios.post("/api/passwordreset/" + token , data);
     }
 
     //make an edit modal and delete modal thing
