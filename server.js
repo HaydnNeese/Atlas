@@ -8,7 +8,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/atlasDB');
+var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/atlasDB'
+
+mongoose.connect(MONGODB_URI);
 
 var db = mongoose.connection;
 
