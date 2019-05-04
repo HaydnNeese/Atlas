@@ -2,7 +2,8 @@ import React from 'react';
 import swal from 'sweetalert';
 import Fade from 'react-reveal/Fade';
 import Logo from '../../images/atlas-logo-only.png';
-import AddModalEx from '../../images/add-modal-ex.png';
+import AddSecretEx from '../../images/add-secret-ex.gif';
+import ViewSecretEx from '../../images/view-secret-ex.gif';
 import { Segment, Button, Grid, Image, Icon } from 'semantic-ui-react';
 import './style.css';
 
@@ -26,13 +27,16 @@ const Swal = () => {
     swal({
         title: "Adding new secrets",
         text: "Hit the 'Add New' button on the home screen and input your secrets in the given fields.",
-        icon: AddModalEx,
+        icon: AddSecretEx,
       })
       .then((value) => {
         switch (value) {
-       
           case true:
-            swal("Checking your secrets", "Click the lock button on the card and input the PIN you chose when signing up.", "info");
+            swal({
+                title: "Checking your secrets",
+                text: "Click the lock button on the card and input the PIN you chose when signing up.",
+                icon: ViewSecretEx,
+              });
             break;
     
           default:
