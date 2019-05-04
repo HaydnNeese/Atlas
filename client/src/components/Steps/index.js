@@ -23,7 +23,7 @@ const StepExampleGroup = () => (
     <Step style={stepStyle}>
       <Icon name='user secret' />
       <Step.Content>
-        <Step.Title>Personal Identification Number</Step.Title>
+        <Step.Title>Passcode</Step.Title>
         <Step.Description>Personalized PIN for layered security.</Step.Description>
       </Step.Content>
     </Step>

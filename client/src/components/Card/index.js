@@ -12,11 +12,9 @@ export const PassCard = props => (
       </Card.Meta>
     </Card.Content >
     <Card.Content className="dark" extra>
-      <div className="ui buttons">
-        <button className="ui button" id="edit-btn">edit</button>
-        <div className="or"></div>
-        <button className="ui button" id="delete-btn">delete</button>
-      </div>
+      <Button icon className="ui primary button delete-button">
+        <Icon color="white" name='trash alternate' />
+      </Button>
     </Card.Content>
   </Card>
 )
@@ -29,8 +27,7 @@ export const LockedCard = props => (
     <Card.Content className="card-center" description="Click the lock to gain access" />
     <button id="lock-btn" className="ui primary button lock-button" onClick={props.handleLockButtonClick}><i className="fas fa-lock"></i></button>
     <Card.Content className="dark" extra>
-      <Icon name='clipboard' />
-      {props.notes} Notes
+      <Icon name='hide' />
     </Card.Content>
   </Card>
 )
@@ -61,7 +58,6 @@ export const SecurityCard = props => (
     </Card.Content>
     <Card.Content className="dark" extra>
       <Icon name='question' />
-      {props.attempts} more tries
   </Card.Content>
   </Card>
 )

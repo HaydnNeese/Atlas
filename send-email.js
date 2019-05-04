@@ -12,7 +12,6 @@ const transport = nodemailer.createTransport(smtpTransport({
 }));
 
 function sendEmail(to) {
-    console.log('hitting sendEmail recipient: ', to);
     let d = Date(Date.now());
     let now = d.toString();
     const mailOptions = {
@@ -42,7 +41,6 @@ module.exports = function(app) {
 
 app.post('/api/email', (req, res) => {
     const to = Object.keys(req.body);
-    console.log('recipient: ', to);
     sendEmail(to);
     res.end();
 })

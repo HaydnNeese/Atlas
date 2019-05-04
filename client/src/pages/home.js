@@ -29,7 +29,6 @@ class Home extends Component {
     title: "",
     note: "",
     modal: [],
-    attempts: 3,
     isCorrect: false,
     locked: true,
     answer: '',
@@ -74,18 +73,19 @@ class Home extends Component {
   handleSubmit = () => {
     const id = localStorage.getItem("userId").replace(/"/g, "");
 
-    API.addModal(id,
-      {
-        title: this.state.title,
-        note: this.state.note
-      }).then(data => {
+          API.addModal( id,
+            {
+              title: this.state.title,
+              note: this.state.note
+            }).then(data => {
+              this.handleClose()
+            })
+  window.location.reload();
+}
 
-        this.handleClose()
-      })
-    window.location.reload();
-  }
 
   handleLockButtonClick = (id) => {
+
     this.setState({
       locked: false,
       selectedCardId: id
@@ -129,7 +129,6 @@ class Home extends Component {
     });
     // console.log(`PIN: ${this.state.userPin}`);
     // console.log(`Array: ${pinString}`);
-
   }
 
   //PIN logic
@@ -150,6 +149,34 @@ class Home extends Component {
                 />
               </Grid.Column>
             </Grid.Row>
+
+          ) : (
+              this.state.isCorrect ? (
+                <Grid.Row stackable columns={3}>
+              
+                  {this.state.modal.map((card) => {
+                    return (
+                      <GridColumn>
+                        {
+                          this.state.selectedCardId === card._id &&
+                        <PassCard
+                          title={card.title}
+                          note={card.note}
+                        />
+                        }
+                        {
+                            this.state.selectedCardId !== card._id && 
+                            <LockedCard
+                            handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
+                            title = {card.title}
+                            notes = {this.state.noteTotal}
+                            />
+                          }
+                      </GridColumn>
+                    )
+                  })}
+                </Grid.Row>
+              ) : (
             <Grid.Row>
               <Grid.Column>
                 <AddModal
@@ -181,10 +208,28 @@ class Home extends Component {
                 this.state.isCorrect ? (
                   <Grid.Row stackable columns={3}>
                     {this.state.modal.map((card) => {
+                      console.log('card: ',card);
                       return (
                         <GridColumn key={card._id}>
                           {
                             this.state.selectedCardId === card._id &&
+                          <SecurityCard
+                            handleAnswerInput={this.handleAnswerInput}
+                            title = {card.title}
+                            name="answer"
+                            value={this.state.answer}
+                            handleAnswerSubmit={this.handleAnswerSubmit}
+                            question={securityArray[0].question}
+                            attempts = {this.state.attempts}
+                            selectedCardId = {this.state.selectedCardId}
+                          />
+                          }
+                          {
+                            this.state.selectedCardId !== card._id && 
+                            <LockedCard
+                            handleLockButtonClick= {() => {this.handleLockButtonClick(card._id)}}
+                            title = {card.title}
+                            notes = {this.state.noteTotal}
                             <PassCard
                               title={card.title}
                               note={card.note}
@@ -221,7 +266,7 @@ class Home extends Component {
                             {
                               this.state.selectedCardId === card._id ||
                               <LockedCard
-                                handleLockButtonClick={this.handleLockButtonClick}
+                                handleLockButtonClick={() => { this.handleLockButtonClick(card._id) }}
                                 title={card.title}
                                 notes={this.state.noteTotal}
                               />

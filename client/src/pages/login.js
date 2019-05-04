@@ -54,7 +54,7 @@ class Login extends Component {
                 
                 }
                 else if (backEndRes.message === "Invalid Password/Username") {
-                    swal("Oops!", "Invalid email/password combination", "warning");
+                    swal("Invalid email/password combination", "Forgot password? Reset password below", "warning");
                 }
                 else{
                     localStorage.setItem("token", JSON.stringify(backEndRes.token));
