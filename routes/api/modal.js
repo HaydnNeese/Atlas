@@ -10,6 +10,7 @@ router.route("/:id")
 // router.route("/post")
     .post(dbController.create)
 
+    .delete(dbController.delete)
 
 module.exports = router;
 

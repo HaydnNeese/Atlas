@@ -28,6 +28,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-reveal": "^1.2.2",
     "react-scripts": "^2.1.8",
     "smtp": "^0.1.4",
     "sweetalert": "^2.1.2"

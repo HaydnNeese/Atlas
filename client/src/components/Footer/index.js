@@ -50,7 +50,7 @@ const Footer = () => (
                             <List.Icon name='github' size='large' verticalAlign='middle' />
                             <List.Content>
                                 <List.Header>Haydn Neese</List.Header>
-                                <List.Description>More dead weight tbh</List.Description>
+                                <List.Description>Sweet Alerts.</List.Description>
                             </List.Content>
                         </List.Item>
                     </List>

@@ -11,10 +11,6 @@ import swal from "sweetalert";
 import Axios from "axios";
 //import sendEmail from '../../../send-email';
 
-const homeBG = {
-  // background: "linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)"
-}
-
 const divStyle = {
   paddingTop: '30px',
   // background: 'linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)'
@@ -60,6 +56,7 @@ class Home extends Component {
   loadModals = (id) => {
     API.getModal(id)
       .then(res => {
+        //console.log('MODAL DEFINITION: ',res.data.modals);
         this.setState({ modal: res.data.modals });
       })
       .catch(err => console.log(err));
@@ -80,7 +77,15 @@ class Home extends Component {
               note: this.state.note
             }).then(data => {
               this.handleClose()
+<<<<<<< HEAD
               this.loadModals(id);
+=======
+              this.loadModals(id)
+              this.setState({
+                title: "",
+                note: ""
+              })
+>>>>>>> a6151ccac675aa080db8aa590ed57de016c2802c
             })
 }
 
@@ -150,9 +155,6 @@ class Home extends Component {
         })
       } else {
         swal("Unable to Verify User", "", "error");
-        // this.setState({
-        //   attempts: this.state.attempts - 1
-        // });
         pinArray = [];
         placeholderArray = [];
         this.setState({
@@ -160,15 +162,28 @@ class Home extends Component {
         })
       }
     });
-    // console.log(`PIN: ${this.state.userPin}`);
-    // console.log(`Array: ${pinString}`);
   }
 
-  //PIN logic
+  // ---------------- delete ----------------
+  handleDelete = modalId => {
+    const id = localStorage.getItem("userId").replace(/"/g, "");
+    swal("Deleting is permanent", "Do you wish to continue?", "warning", {buttons: {
+      cancel: true,
+      confirm: "Confirm"}
+    })
+    .then((cancel) => {
+      if (cancel) {
+        API.delete(modalId)
+        .then(res => {this.loadModals(id)})
+        .catch(err => console.log(err));
+      }
+    })
+  }
+
 
   render() {
     return (
-      <div style={homeBG}>
+      <div>
         <Banner />
         <Container>
           <Grid stackable style={divStyle} textAlign='center'>
@@ -220,6 +235,7 @@ class Home extends Component {
                             <PassCard
                             title = {card.title}
                             note = {card.note}
+                            handleDelete = {() => {this.handleDelete(card._id)}}
                             />
                           }
                           {
