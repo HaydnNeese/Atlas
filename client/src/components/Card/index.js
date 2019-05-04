@@ -13,7 +13,7 @@ export const PassCard = props => (
     </Card.Content >
     <Card.Content className="dark" extra>
       <Button icon className="ui primary button delete-button" onClick={props.handleDelete}>
-        <Icon color="white" name='trash alternate' />
+        <Icon name='trash alternate' />
       </Button>
     </Card.Content>
   </Card>
@@ -38,27 +38,28 @@ export const SecurityCard = props => (
     <Image src={props.image} />
     <Card.Content className="card-header" header={props.title} />
     <Card.Content className="card-center">
-    <p>Click the buttons to enter a 6-digit PIN.</p>
-    <p id="placeholder-line">{props.placeholder}</p>
+      <p>Click the buttons to enter a 6-digit PIN.</p>
+      <p id="placeholder-line">{props.placeholder}</p>
       <Form>
-      <div id="pinpad" className="btn-group btn-matrix mb-3" >
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="1">1</button>
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="2">2</button>
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="3">3</button>
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="4">4</button>
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="5">5</button>
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="6">6</button>
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="7">7</button>
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="8">8</button>
-      <button  onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="9">9</button>
-    </div>
+        <div id="pinpad" className="btn-group btn-matrix mb-3" >
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="1">1</button>
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="2">2</button>
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="3">3</button>
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="4">4</button>
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="5">5</button>
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="6">6</button>
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="7">7</button>
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="8">8</button>
+          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="9">9</button>
+        </div>
 
         <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
+        <Button id="reset-btn" onClick={props.handlePinReset}>Reset</Button>
       </Form>
     </Card.Content>
     <Card.Content className="dark" extra>
       <Icon name='question' />
-  </Card.Content>
+    </Card.Content>
   </Card>
 )
 

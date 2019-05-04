@@ -77,11 +77,15 @@ class Home extends Component {
               note: this.state.note
             }).then(data => {
               this.handleClose()
+<<<<<<< HEAD
+              this.loadModals(id);
+=======
               this.loadModals(id)
               this.setState({
                 title: "",
                 note: ""
               })
+>>>>>>> a6151ccac675aa080db8aa590ed57de016c2802c
             })
 }
 
@@ -92,6 +96,14 @@ class Home extends Component {
     })
   }
 
+  resetPinArrays = () => {
+    pinArray = [];
+    placeholderArray = [];
+    console.log({pinArray});
+    this.setState({
+      placeholder: ""
+    })
+  }
   createPlaceHolder = (string) => {
     this.setState({
       placeholder: string
@@ -100,10 +112,13 @@ class Home extends Component {
   }
 
   handleAnswerInput = event => {
+    //add value of click to the pinArray
     pinArray.push(event.target.value);
+    //in a separate array put a * each time a button is clicked
     placeholderArray.push('*');
+    //convert this array to a string
     let placeholderString = placeholderArray.join('');
-    console.log(placeholderString);
+    //use the function to send this string to update the state of placeholderArray
     this.createPlaceHolder(placeholderString);
   }
 
@@ -127,12 +142,24 @@ class Home extends Component {
           isCorrect: true
         });
         pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
       } else if (this.state.answer === "") {
         swal("Error", "Enter your PIN to gain access", "warning");
         pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
       } else {
         swal("Unable to Verify User", "", "error");
         pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
       }
     });
   }
@@ -238,9 +265,10 @@ class Home extends Component {
                                 handleAnswerSubmit={this.handleAnswerSubmit}
                                 attempts={this.state.attempts}
                                 placeholder={this.state.placeholder}
+                                handlePinReset={this.resetPinArrays}
                               />
                             }
-                            {
+                           {
                               this.state.selectedCardId === card._id ||
                               <LockedCard
                                 handleLockButtonClick={() => { this.handleLockButtonClick(card._id) }}
