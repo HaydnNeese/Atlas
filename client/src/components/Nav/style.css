@@ -3,6 +3,7 @@
     position: fixed;
     width:100%;
     z-index: 4;
+    border-radius: 0;
 }
 
 #nav-link-login, #nav-link-signup, #nav-link-logout {
