@@ -56,6 +56,7 @@ class Home extends Component {
   loadModals = (id) => {
     API.getModal(id)
       .then(res => {
+        //console.log('MODAL DEFINITION: ',res.data.modals);
         this.setState({ modal: res.data.modals });
       })
       .catch(err => console.log(err));
@@ -76,19 +77,33 @@ class Home extends Component {
               note: this.state.note
             }).then(data => {
               this.handleClose()
+<<<<<<< HEAD
+              this.loadModals(id);
+=======
+              this.loadModals(id)
+              this.setState({
+                title: "",
+                note: ""
+              })
+>>>>>>> a6151ccac675aa080db8aa590ed57de016c2802c
             })
-  window.location.reload();
 }
 
-
   handleLockButtonClick = (id) => {
-
     this.setState({
       locked: false,
       selectedCardId: id
     })
   }
 
+  resetPinArrays = () => {
+    pinArray = [];
+    placeholderArray = [];
+    console.log({pinArray});
+    this.setState({
+      placeholder: ""
+    })
+  }
   createPlaceHolder = (string) => {
     this.setState({
       placeholder: string
@@ -97,10 +112,13 @@ class Home extends Component {
   }
 
   handleAnswerInput = event => {
+    //add value of click to the pinArray
     pinArray.push(event.target.value);
+    //in a separate array put a * each time a button is clicked
     placeholderArray.push('*');
+    //convert this array to a string
     let placeholderString = placeholderArray.join('');
-    console.log(placeholderString);
+    //use the function to send this string to update the state of placeholderArray
     this.createPlaceHolder(placeholderString);
   }
 
@@ -124,22 +142,44 @@ class Home extends Component {
           isCorrect: true
         });
         pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
       } else if (this.state.answer === "") {
         swal("Error", "Enter your PIN to gain access", "warning");
         pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
       } else {
         swal("Unable to Verify User", "", "error");
-        // this.setState({
-        //   attempts: this.state.attempts - 1
-        // });
         pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
       }
     });
-    // console.log(`PIN: ${this.state.userPin}`);
-    // console.log(`Array: ${pinString}`);
   }
 
-  //PIN logic
+  // ---------------- delete ----------------
+  handleDelete = modalId => {
+    const id = localStorage.getItem("userId").replace(/"/g, "");
+    swal("Deleting is permanent", "Do you wish to continue?", "warning", {buttons: {
+      cancel: true,
+      confirm: "Confirm"}
+    })
+    .then((cancel) => {
+      if (cancel) {
+        API.delete(modalId)
+        .then(res => {this.loadModals(id)})
+        .catch(err => console.log(err));
+      }
+    })
+  }
+
 
   render() {
     return (
@@ -195,6 +235,7 @@ class Home extends Component {
                             <PassCard
                             title = {card.title}
                             note = {card.note}
+                            handleDelete = {() => {this.handleDelete(card._id)}}
                             />
                           }
                           {
@@ -224,9 +265,10 @@ class Home extends Component {
                                 handleAnswerSubmit={this.handleAnswerSubmit}
                                 attempts={this.state.attempts}
                                 placeholder={this.state.placeholder}
+                                handlePinReset={this.resetPinArrays}
                               />
                             }
-                            {
+                           {
                               this.state.selectedCardId === card._id ||
                               <LockedCard
                                 handleLockButtonClick={() => { this.handleLockButtonClick(card._id) }}
