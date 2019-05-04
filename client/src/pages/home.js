@@ -37,7 +37,8 @@ class Home extends Component {
     clicked: false,
     selectedCardId: "",
     userPin: "",
-    email: ""
+    email: "",
+    placeholder: ""
   };
 
   handleChange = event => {
@@ -92,8 +93,19 @@ class Home extends Component {
     })
   }
 
+  createPlaceHolder = (string) => {
+    this.setState({
+      placeholder: string
+    })
+    console.log("Placeholder state: " + this.state.placeholder)
+  }
+
   handleAnswerInput = event => {
     pinArray.push(event.target.value);
+    placeholderArray.push('*');
+    let placeholderString = placeholderArray.join('');
+    console.log(placeholderString);
+    this.createPlaceHolder(placeholderString);
   }
 
   handleAnswerSubmit = event => {
@@ -215,6 +227,7 @@ class Home extends Component {
                                 value={card.value}
                                 handleAnswerSubmit={this.handleAnswerSubmit}
                                 attempts={this.state.attempts}
+                                placeholder={this.state.placeholder}
                               />
                             }
                             {
