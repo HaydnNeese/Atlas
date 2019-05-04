@@ -123,9 +123,9 @@ class Login extends Component {
                                 </Button>
                             </Form>
                         </Segment>
-                        <Message>
+                        <Header as="h4" textAlign="center">
                             Don't have an account yet? <a href="/signup">Sign Up</a>
-                        </Message>
+                        </Header>
                     </Grid.Column>
                     <Steps />
                 </Grid>

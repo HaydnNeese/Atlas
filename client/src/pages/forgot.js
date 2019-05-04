@@ -85,7 +85,7 @@ class Forgot extends Component {
                                     type="email"
                                 />
                                 <Button type="submit" color="blue" fluid size="large" onClick={this.handleReset}>
-                                    Rest Password
+                                    Reset Password
                                 </Button>
                             </Form>
                         </Segment>
