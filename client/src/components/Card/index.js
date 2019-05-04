@@ -38,7 +38,7 @@ export const SecurityCard = props => (
     <Image src={props.image} />
     <Card.Content className="card-header" header={props.title} />
     <Card.Content className="card-center">
-    <p>Click the buttons to enter a 4-digit PIN.</p>
+    <p>Click the buttons to enter a 6-digit PIN.</p>
     <p id="placeholder-line">{props.placeholder}</p>
       <Form>
       <div id="pinpad" className="btn-group btn-matrix mb-3" >
