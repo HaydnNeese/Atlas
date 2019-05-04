@@ -11,10 +11,6 @@ import swal from "sweetalert";
 import Axios from "axios";
 //import sendEmail from '../../../send-email';
 
-const homeBG = {
-  // background: "linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)"
-}
-
 const divStyle = {
   paddingTop: '30px',
   // background: 'linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)'
@@ -37,7 +33,8 @@ class Home extends Component {
     clicked: false,
     selectedCardId: "",
     userPin: "",
-    email: ""
+    email: "",
+    placeholder: ""
   };
 
   handleChange = event => {
@@ -95,8 +92,19 @@ class Home extends Component {
     })
   }
 
+  createPlaceHolder = (string) => {
+    this.setState({
+      placeholder: string
+    })
+    console.log("Placeholder state: " + this.state.placeholder)
+  }
+
   handleAnswerInput = event => {
     pinArray.push(event.target.value);
+    placeholderArray.push('*');
+    let placeholderString = placeholderArray.join('');
+    console.log(placeholderString);
+    this.createPlaceHolder(placeholderString);
   }
 
   handleAnswerSubmit = event => {
@@ -148,7 +156,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div style={homeBG}>
+      <div>
         <Banner />
         <Container>
           <Grid stackable style={divStyle} textAlign='center'>
@@ -229,6 +237,7 @@ class Home extends Component {
                                 value={card.value}
                                 handleAnswerSubmit={this.handleAnswerSubmit}
                                 attempts={this.state.attempts}
+                                placeholder={this.state.placeholder}
                               />
                             }
                             {

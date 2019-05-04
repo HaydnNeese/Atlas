@@ -19,6 +19,10 @@
     background-color: #8ecbff;
 }
 
+#lock-btn:hover {
+  background-color: #bcff9d;
+}
+
 #submit-btn {
     background-color: #bcff9d;
 }
@@ -50,4 +54,19 @@
   #pinpad {
     margin: auto;
     padding: 5px;
+  }
+  .btn.btn-dark.styled-btn {
+    background-color: #8ecbff;
+    color: white;
+    font-size: 20px;
+  }
+  .btn.btn-dark.styled-btn:hover {
+    background-color: #bcff9d;
+  }
+
+  #placeholder-line {
+    font-size: 30px;
+    margin: 5px;
+    height: 40px;
+    border: 2px groove darkblue;
   }

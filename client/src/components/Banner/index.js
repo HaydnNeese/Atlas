@@ -1,5 +1,9 @@
 import React from 'react';
+import swal from 'sweetalert';
+import Fade from 'react-reveal/Fade';
 import Logo from '../../images/atlas-logo-only.png';
+import AddSecretEx from '../../images/add-secret-ex.gif';
+import ViewSecretEx from '../../images/view-secret-ex.gif';
 import { Segment, Button, Grid, Image, Icon } from 'semantic-ui-react';
 import './style.css';
 
@@ -19,6 +23,28 @@ const btnStyle = {
     border: '1px black solid'
 }
 
+const Swal = () => {
+    swal({
+        title: "Adding new secrets",
+        text: "Hit the 'Add New' button on the home screen and input your secrets in the given fields.",
+        icon: AddSecretEx,
+      })
+      .then((value) => {
+        switch (value) {
+          case true:
+            swal({
+                title: "Checking your secrets",
+                text: "Click the lock button on the card and input the PIN you chose when signing up.",
+                icon: ViewSecretEx,
+              });
+            break;
+    
+          default:
+            break;
+        }
+      });
+    }
+
 const Banner = () => (
     <Segment style={bannerStyle}>
         <Grid stackable>
@@ -31,9 +57,13 @@ const Banner = () => (
                     />
                 </Grid.Column>
                 <Grid.Column textAlign='center' width={8}>
-                    <h1>Care about your security?</h1>
-                    <h2>So do we.</h2>
-                    <h3><Icon name='lock'/>Passcode protected, worry-free info storage with Atlas</h3>
+                    <Fade top>
+                        <h1>Care about your security?</h1>
+                        <h2>So do we.</h2>
+                    </Fade>
+                    <Fade bottom>
+                        <h3><Icon name='lock'/>Passcode protected, worry-free info storage with Atlas</h3>
+                    </Fade>
                     <br/>
                     <a href='#main-logo'><Icon name='angle double down' size='large' /></a>
                 </Grid.Column>
@@ -42,7 +72,7 @@ const Banner = () => (
                         <a href='#main-logo'><Button style={btnStyle} color='green'>Get Started</Button></a>
                     </div>
                     <div>
-                        <Button style={btnStyle} color='pink'>Learn How</Button>
+                        <Button style={btnStyle} onClick={Swal} color='pink'>Learn How</Button>
                     </div>
                 </Grid.Column>
             </Grid.Row>
