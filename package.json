@@ -15,17 +15,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.2",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "if-env": "^1.0.4",
+    "express-session": "^1.16.1",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.2.1",
     "moment": "^2.24.0",
     "mongoose": "^5.5.1",
+    "nodemailer": "^6.1.1",
+    "nodemailer-smtp-transport": "^2.7.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "^2.1.8"
+    "react-reveal": "^1.2.2",
+    "react-scripts": "^2.1.8",
+    "smtp": "^0.1.4",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

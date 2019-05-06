@@ -9,8 +9,10 @@ body {
   min-height: 100vh;
   min-width: 100%;
   background: #43C6AC;
-  background: -webkit-linear-gradient(to left, #F8FFAE, #43C6AC); 
-  background: linear-gradient(to left, #F8FFAE, #43C6AC);
+}
+
+html, body {
+  width: 100%;
 }
 
 code {

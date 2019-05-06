@@ -15,10 +15,10 @@ const AddModal = (props) => (
                 <Header>Add a new note</Header>
                 <Form>
                     <Form.Field required>
-                        <label>Title of Note</label>
-                        <Form.Input required
+                        <label>Title</label>
+                        <Form.Input
                             fluid
-                            placeholder="Secret Note/Password Hints..."
+                            placeholder="Title will be visible from your home screen"
                             type="text"
                             name="title"
                             onChange={props.handleChange}
@@ -26,8 +26,8 @@ const AddModal = (props) => (
                         />
                     </Form.Field>
                     <Form.TextArea required
-                        label='Note Content'
-                        placeholder='Keep your secrets here...' 
+                        label='Secret'
+                        placeholder='This content will be hidden until you unlock it' 
                         name="note"
                         onChange={props.handleChange}
                         value={props.note}/>

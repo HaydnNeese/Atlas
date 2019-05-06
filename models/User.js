@@ -12,8 +12,9 @@ var UserSchema = new Schema({
         unique: true
     },
     phone: String,
-    question: String,
-    answer: String,
+    pin: String,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
         
     modals: [
         {

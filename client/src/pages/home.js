@@ -5,37 +5,19 @@ import { PassCard, LockedCard, SecurityCard } from '../components/Card';
 // we need to make a ternary expression or something like that that will help choose which of these will render
 // you can just pass in the different card names and to see what they look like
 import AddModal from '../components/AddModal';
-import API from "../utils/api"
+import Banner from '../components/Banner';
+import API from "../utils/api";
+import swal from "sweetalert";
+import Axios from "axios";
+//import sendEmail from '../../../send-email';
 
 const divStyle = {
-  paddingTop: '90px',
+  paddingTop: '30px',
+  // background: 'linear-gradient(305deg, #B2EC5D, #DDFC74, #FFF697, #B2FFD6, #9FD8CB, #9FD8CB)'
 };
 
-//dummy information
-// const cardArray = [
-//   {
-//     title: "Gmail account",
-//     note: "Password is my favorite food from that trip in california and security question answer is Ramen Bowls",
-//     image: "https://assets.hardwarezone.com/img/2016/02/gmail.jpg"
-//   },
-//   {
-//     title: "Facebook account",
-//     note: "Password is my ex-wife's dogs name  and email is megalodon_007@msn.com",
-//     image: "https://www.sketchappsources.com/resources/source-image/facebook-logo.jpg"
-//   },
-//   {
-//     title: "NFL.com Fantasy Football",
-//     note: "Password is Mahomes_69 and email is raiders_suck@chiefs.com",
-//     image: "https://hd-report.com/wp-content/uploads/2018/09/nfl-logo-gradient-1980px.jpg"
-//   }
-// ]
-
-const securityArray = [
-  {
-    question: "2 + 2 = 4, true or false?",
-    answer: "true"
-  }
-]
+let pinArray = [];
+let placeholderArray = [];
 
 class Home extends Component {
 
@@ -43,12 +25,16 @@ class Home extends Component {
     title: "",
     note: "",
     modal: [],
-    attempts: 3,
     isCorrect: false,
     locked: true,
     answer: '',
     noteTotal: 0,
-    modalOpen: false
+    modalOpen: false,
+    clicked: false,
+    selectedCardId: "",
+    userPin: "",
+    email: "",
+    placeholder: ""
   };
 
   handleChange = event => {
@@ -57,156 +43,253 @@ class Home extends Component {
 
   componentDidMount() {
     const id = localStorage.getItem("userId").replace(/"/g, "");
-
-    console.log('this is id in home.js: ', id);
+    const userPin = localStorage.getItem("pin").replace(/"/g, "");
+    const email = localStorage.getItem("email").replace(/"/g, "");
+    this.setState({
+      userPin,
+      email
+    })
+    console.log(this.state.userPin);
     this.loadModals(id);
   }
 
   loadModals = (id) => {
     API.getModal(id)
-      .then(res  => { 
-        
-        console.log("THIS IS THE FRONT END RESPONSE", res.data.modals);
+      .then(res => {
+        //console.log('MODAL DEFINITION: ',res.data.modals);
         this.setState({ modal: res.data.modals });
-        console.log(this.state.modal);
-        
-     })
+      })
       .catch(err => console.log(err));
   }
 
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => {
-    this.setState({ modalOpen: false })
-    console.log("modal closed")
+    this.setState({ modalOpen: false });
   }
 
   handleSubmit = () => {
     const id = localStorage.getItem("userId").replace(/"/g, "");
 
-    API.addModal( id,
-    {
-      title: this.state.title,
-      note: this.state.note
-    }).then(data => {
-      console.log('DATA from the backend: ', data);
-      this.handleClose()
+          API.addModal( id,
+            {
+              title: this.state.title,
+              note: this.state.note
+            }).then(data => {
+              this.handleClose()
+              this.loadModals(id)
+              this.setState({
+                title: "",
+                note: ""
+              })
+            })
+}
+
+  handleLockButtonClick = (id) => {
+    this.setState({
+      locked: false,
+      selectedCardId: id
     })
-    window.location.reload();
   }
 
-  handleLockButtonClick = () => {
+  resetPinArrays = () => {
+    pinArray = [];
+    placeholderArray = [];
+    console.log({pinArray});
     this.setState({
-      locked: false
+      placeholder: ""
     })
+  }
+  createPlaceHolder = (string) => {
+    this.setState({
+      placeholder: string
+    })
+    console.log("Placeholder state: " + this.state.placeholder)
   }
 
   handleAnswerInput = event => {
-    this.setState({ answer: event.target.value });
+    //add value of click to the pinArray
+    pinArray.push(event.target.value);
+    //in a separate array put a * each time a button is clicked
+    placeholderArray.push('*');
+    //convert this array to a string
+    let placeholderString = placeholderArray.join('');
+    //use the function to send this string to update the state of placeholderArray
+    this.createPlaceHolder(placeholderString);
   }
 
   handleAnswerSubmit = event => {
     event.preventDefault();
-    console.log(securityArray[0].answer)
-    console.log(this.state.answer);
-    if (this.state.answer === securityArray[0].answer) {
-      console.log("if-statement");
-      this.setState({
-        isCorrect: true
-      })
-    }else {
-      this.setState({
-        attempts: this.state.attempts - 1
-      })
-    }
+    let pinString = pinArray.join('');
+    console.log(pinString)
+    this.setState({ answer: pinString }, () => {
+      if (this.state.answer === this.state.userPin) {
+        swal("User Verified", "", "success");
+        let userEmail = this.state.email;
+        //console.log('front end user email', userEmail);
+        Axios.post('/api/email', userEmail)
+          .then(response => {
+            console.log('email response: ', response);
+          })
+          .catch(err => {
+            console.log('email error: ', err);
+          })
+        this.setState({
+          isCorrect: true
+        });
+        pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
+      } else if (this.state.answer === "") {
+        swal("Error", "Enter your PIN to gain access", "warning");
+        pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
+      } else {
+        swal("Unable to Verify User", "", "error");
+        pinArray = [];
+        placeholderArray = [];
+        this.setState({
+          placeholder: ""
+        })
+      }
+    });
   }
+
+  // ---------------- delete ----------------
+  handleDelete = modalId => {
+    const id = localStorage.getItem("userId").replace(/"/g, "");
+    swal("Deleting is permanent", "Do you wish to continue?", "warning", {buttons: {
+      cancel: true,
+      confirm: "Confirm"}
+    })
+    .then((cancel) => {
+      if (cancel) {
+        API.delete(modalId)
+        .then(res => {this.loadModals(id)})
+        .catch(err => console.log(err));
+      }
+    })
+  }
+
 
   render() {
     return (
-
-      <Container>
-        <Grid stackable style={divStyle} textAlign='center'>
-          <Grid.Row>
-            <Grid.Column>
-              <Image
-                centered
-                size="medium"
-                src={titleLogo}
-              />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <AddModal
-                title={this.state.title}
-                note={this.state.note}
-                open={this.state.modalOpen}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-                handleOpen={this.handleOpen}
-              />
-            </Grid.Column>
-          </Grid.Row>
-          {this.state.locked ? (
-            <Grid.Row stackable columns={3}>
-            {this.state.modal.map((card) => {
-              return (
-              <GridColumn>
-                <LockedCard
-                  handleLockButtonClick={this.handleLockButtonClick}
-                  title = {card.title}
-                  notes = {this.state.noteTotal}
+      <div>
+        <Banner />
+        <Container>
+          <Grid stackable style={divStyle} textAlign='center'>
+            <Grid.Row>
+              <Grid.Column>
+                <Image
+                  id="main-logo"
+                  centered
+                  size="medium"
+                  src={titleLogo}
                 />
-              </GridColumn>
-              )
-            })}
+              </Grid.Column>
             </Grid.Row>
-          ) : (
-              this.state.isCorrect ? (
-                <Grid.Row stackable columns={3}>
-                  {this.state.modal.map((card) => {
-                    return (
-                      <GridColumn>
-                        <PassCard
-                          title={card.title}
-                          note={card.note}
-                        />
-                      </GridColumn>
-                    )
-                  })}
-                </Grid.Row>
-              ) : (
+            <Grid.Row>
+              <Grid.Column>
+                <AddModal
+                  title={this.state.title}
+                  note={this.state.note}
+                  open={this.state.modalOpen}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                  handleOpen={this.handleOpen}
+                  handleClose={this.handleClose}
+                />
+              </Grid.Column>
+            </Grid.Row>
+            {this.state.locked ? (
+              <Grid.Row stackable columns={3}>
+                {this.state.modal.map((card) => {
+                  return (
+                    <GridColumn key={card._id}>
+                      <LockedCard
+                        handleLockButtonClick={() => { this.handleLockButtonClick(card._id) }}
+                        title={card.title}
+                        notes={this.state.noteTotal}
+                      />
+                    </GridColumn>
+                  )
+                })}
+              </Grid.Row>
+            ) : (
+                this.state.isCorrect ? (
                   <Grid.Row stackable columns={3}>
                     {this.state.modal.map((card) => {
                       return (
-                        <GridColumn>
-                          <SecurityCard
-                            handleAnswerInput={this.handleAnswerInput}
+                        <GridColumn key={card._id}>
+                          {
+                            this.state.selectedCardId === card._id &&
+                            <PassCard
                             title = {card.title}
-                            name="answer"
-                            value={this.state.answer}
-                            handleAnswerSubmit={this.handleAnswerSubmit}
-                            question={securityArray[0].question}
-                            attempts = {this.state.attempts}
-                          />
+                            note = {card.note}
+                            handleDelete = {() => {this.handleDelete(card._id)}}
+                            />
+                          }
+                          {
+                            this.state.selectedCardId === card._id ||
+                            <LockedCard
+                              handleLockButtonClick={() => { this.handleLockButtonClick(card._id) }}
+                              title={card.title}
+                              notes={this.state.noteTotal}
+                            />
+                          }
                         </GridColumn>
                       )
                     })}
                   </Grid.Row>
+                ) : (
+                    <Grid.Row stackable columns={3}>
+                      {this.state.modal.map((card) => {
+                        return (
+                          <GridColumn key={card._id}>
+                            {
+                              this.state.selectedCardId === card._id &&
+                              <SecurityCard
+                                handleAnswerInput={this.handleAnswerInput}
+                                title={card.title}
+                                name="answer"
+                                value={card.value}
+                                handleAnswerSubmit={this.handleAnswerSubmit}
+                                attempts={this.state.attempts}
+                                placeholder={this.state.placeholder}
+                                handlePinReset={this.resetPinArrays}
+                              />
+                            }
+                           {
+                              this.state.selectedCardId === card._id ||
+                              <LockedCard
+                                handleLockButtonClick={() => { this.handleLockButtonClick(card._id) }}
+                                title={card.title}
+                                notes={this.state.noteTotal}
+                              />
+                            }
+                          </GridColumn>
+                        )
+                      })}
+                    </Grid.Row>
                   )
               )}
-        </Grid>
-      </Container>
-    
-        );
-      }
-    }
-    //we need to have it read the total number of stored cards
-    //on each card it should show the LockedCard component
-    //click on the lock to reveal the SecurityCard component
-    //then have the SecurityCard receive the stored security question and display it to the card
-    //capture the answer and compare it with the stored answer
-    //if it is correct then reveal the PassCard and maybe use the success tool that Semantic UI has
-    //if it is incorrect use the incorrect tool that semantic UI has and have the total number of tries reduce by 1
-    //after three failed tries have it lock the user out (optional)
-    export default Home;
+          </Grid>
+        </Container>
+      </div>
+    );
+  }
+}
+//we need to have it read the total number of stored cards
+//on each card it should show the LockedCard component
+//click on the lock to reveal the SecurityCard component
+//then have the SecurityCard receive the stored security question and display it to the card
+//capture the answer and compare it with the stored answer
+//if it is correct then reveal the PassCard and maybe use the success tool that Semantic UI has
+//if it is incorrect use the incorrect tool that semantic UI has and have the total number of tries reduce by 1
+//after three failed tries have it lock the user out (optional)
+export default Home;

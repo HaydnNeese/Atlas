@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import titleLogo from '../images/atlas-black-logo.png';
 import Steps from '../components/Steps';
+import FormErrors from './formErrors';
 import {
     Button,
     Form,
@@ -16,26 +17,74 @@ const divStyle = {
     paddingTop: '90px',
 };
 
-const options = [
-    { key: '1', text: 'Security question example (drop down for info)', value: 'q1' },
-    { key: '2', text: 'For now lets have a single question', value: 'q2' },
-    { key: '3', text: 'Theyll use the question for all card access', value: 'q3' },
-    { key: '4', text: 'So we can get MVP functionality in the 2 weeks', value: 'q4' },
-    { key: '5', text: 'Then phone alerts then random security questions', value: 'q5' }
-]
-
 class Signup extends Component {
     state = {
         username: "",
         password: "",
         phone: "",
         email: "",
-        question: "",
-        answer: ""
+        pin: "",
+        formErrors: {username: '', password: '', phone: '', email: '', pin: ''},
+        usernameValid: false,
+        passwordValid: false,
+        phoneValid: false,
+        emailValid: false,
+        pinValid: false,
+        formValid: false
     }
 
-    handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
+    validateField(name, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+        let usernameValid = this.state.usernameValid;
+        let phoneValid = this.state.phoneValid;
+        let pinValid = this.state.pinValid;
+      
+        switch(name) {
+          case 'email':
+            emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+            fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+            break;
+          case 'password':
+            passwordValid = value.length >= 6 && value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/);
+            fieldValidationErrors.password = passwordValid ? '': ' must be at least 8 characters and contain 1 capital, 1 lowercase, a number';
+            break;
+          case 'username':
+            usernameValid = value.length >= 4;
+            fieldValidationErrors.username = usernameValid ? '': ' must be at least 4 characters';
+            break;
+          case 'phone':
+            phoneValid = value.match(/\d/g)
+            phoneValid = phoneValid && phoneValid.length===10
+            fieldValidationErrors.phone = phoneValid ? '': ' numbers should be entered with only digits';
+            break;
+          case 'pin':
+            pinValid = value.length >= 6;
+            fieldValidationErrors.pin = pinValid ? '': ' must consist of at least 6 digits';
+            break;
+          default:
+            break;
+        }
+        this.setState({
+            formErrors: fieldValidationErrors,
+            emailValid: emailValid,
+            passwordValid: passwordValid,
+            usernameValid: usernameValid, 
+            phoneValid: phoneValid,
+            pinValid: pinValid
+            }, this.validateForm);
+      }
+      
+      validateForm() {
+        this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.usernameValid && this.state.phoneValid && this.state.pinValid});
+      }
+
+    handleChange = e => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value}, 
+            () => { this.validateField(name, value) });
     }
 
     handleSubmit = async (e) => {
@@ -51,24 +100,17 @@ class Signup extends Component {
                     password: this.state.password,
                     phone: this.state.phone,
                     email: this.state.email,
-                    question: this.state.question,
-                    answer: this.state.answer
+                    pin: this.state.pin,
                 }),
             });
             var body1 = await response.json();
-            console.log("printed from signupJS", body1);
+            //console.log("printed from signupJS", body1);
             this.setState({ responseToPost: body1 });
+            window.location.href = "/";
         } catch (err) {
             console.error(err.toString())
         }
     };
-
-    onOptionChange = event => {
-        this.setState({
-            question: event.target.textContent
-        })
-        //need this to write to the database
-    }
 
     render() {
         return (
@@ -81,10 +123,11 @@ class Signup extends Component {
                             src={titleLogo}
                         />
                         <Header as="h2" textAlign="center">
-                            Signup for secure information storage.
+                            Sign up for Secure Information Storage                           
                         </Header>
                         <Segment>
                             <Form size="large">
+                                
                                 <Form.Field required>
                                     <label>Username</label>
                                     <Form.Input required
@@ -117,7 +160,7 @@ class Signup extends Component {
                                         fluid
                                         icon="envelope"
                                         iconPosition="left"
-                                        placeholder="i-am-sick@frontend.com"
+                                        placeholder="email@domain.com"
                                         type="email"
                                         name="email"
                                         onChange={this.handleChange}
@@ -131,34 +174,32 @@ class Signup extends Component {
                                         icon="phone"
                                         iconPosition="left"
                                         placeholder="(123) 456-7890"
-                                        type="tel"
+                                        type="number"
                                         name="phone"
                                         onChange={this.handleChange}
                                         value={this.state.phone}
                                     />
                                 </Form.Field>
-                                {/* Security questions here */}
-                                <Form.Select required fluid 
-                                label='Security Question' 
-                                options={options} 
-                                onChange={this.onOptionChange} 
-                                placeholder='Choose your security question' 
-                                />
                                 <Form.Field required>
-                                    <label>Security Answer</label>
+                                    <label>Set Pin Number</label>
                                     <Form.Input required
                                         fluid
                                         icon="lock"
                                         iconPosition="left"
-                                        placeholder="Answer"
-                                        type="text"
-                                        name="answer"
+                                        placeholder="Pin Number"
+                                        type="number"
+                                        name="pin"
                                         onChange={this.handleChange}
-                                        value={this.state.answer}
+                                        value={this.state.pin}
                                     />
                                 </Form.Field>
-                                <Button type="submit" color="blue" value="Submit" fluid size="large" onClick={this.handleSubmit}>
-                                    Submit
+                                {/* This is where our errors will be displayed */}
+                                <Header as="h4" textAlign="center" color="red">
+                                <FormErrors formErrors={this.state.formErrors}/>
+                                </Header>
+                                
+                                <Button type="submit" color="blue" value="Submit" fluid size="large" onClick={this.handleSubmit} disabled={!this.state.formValid}>
+                                    Create Account
                                 </Button>
                             </Form>
                         </Segment>
