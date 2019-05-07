@@ -6,6 +6,10 @@ const port = process.env.PORT || 3001;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
+
 var mongoose = require('mongoose');
 
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/atlasDB'
