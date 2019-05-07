@@ -1,3 +1,78 @@
-button.lock-icon {
-    width: 10%;
+.ui.card>.button, .ui.card>.buttons, .ui.cards>.card>.button, .ui.cards>.card>.buttons  {
+    width: 20%;
+    margin-left: 39%;
+    margin-bottom: 5%;
 }
+.ui.grid>.row>[class*="center aligned"].column.column, .ui.grid>[class*="center aligned"].column.column, .ui.grid>[class*="center aligned"].row>.column, .ui[class*="center aligned"].grid>.column, .ui[class*="center aligned"].grid>.row>.column {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#delete-btn {
+    background-color: #8ecbff;
+}
+#edit-btn {
+    background-color: #bcff9d;
+}
+
+#lock-btn {
+    background-color: #8ecbff;
+}
+
+#lock-btn:hover {
+  background-color: #bcff9d;
+}
+
+#submit-btn {
+    background-color: #bcff9d;
+}
+
+
+.btn-matrix { 
+    width: 10rem;
+    height: 10rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn-matrix > .btn {
+    width: 33.3%;
+    height: 33.3%;
+    border: 1px solid #e9ecef;
+    border-radius: 25px;
+    padding: 10px;
+  }
+  
+  .btn-matrix > .btn:first-child, .btn-matrix > .btn:last-child {
+    border-radius: 25;
+    padding: 10px;
+  }
+  
+  .btn-matrix .btn + .btn {
+    margin-left: 0;
+  }
+
+  #pinpad {
+    margin: auto;
+    padding: 5px;
+  }
+  .btn.btn-dark.styled-btn {
+    background-color: #8ecbff;
+    color: white;
+    font-size: 20px;
+  }
+  .btn.btn-dark.styled-btn:focus {
+    outline: none;
+  }
+  .btn.btn-dark.styled-btn:hover {
+    background-color: #bcff9d;
+  }
+
+  #reset-btn {
+  }
+  #placeholder-line {
+    font-size: 30px;
+    margin: 5px;
+    height: 40px;
+    background-color: #e9ecef;
+    border-radius: 25px;
+  }

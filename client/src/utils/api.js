@@ -1,21 +1,18 @@
 import axios from "axios";
 
-const instance = () => 
-    axios.create({
-        timeout: 1000,
-        headers: {Authorization: localStorage.getItem("token")}
-    });
-
 export default {
-    //get modals for a specific ID
-    getModal: function(id) {
-        console.log('this is api.js id: ', id);
-        return instance().get("/api/modal/" + id);
-    }, 
-    //post for adding modals
-    addModal: function(id, data) {
-        return instance().post("/api/modal/post/", id, data);
+    getModal: function (id) {
+        return axios.get("/api/modal/" + id);
+    },
+    addModal: function (id,data) {
+        return axios.post("/api/modal/" + id , data);
+    },
+    delete: function(id) {
+        return axios.delete("/api/modal/" + id);
+      },
+    resetPassword: function(token, data) {
+        return axios.post("/api/passwordreset/" + token , data);
     }
+
+    //make an edit modal and delete modal thing
 };
-
-

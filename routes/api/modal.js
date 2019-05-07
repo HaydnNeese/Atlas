@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const dbController = require("../../controllers/controller")
-const protectRoute = require("../../protect");
+//const protectRoute = require("../../protect");
 
 //This is getting our /api/modal/:id route
 router.route("/:id")
@@ -10,6 +10,7 @@ router.route("/:id")
 // router.route("/post")
     .post(dbController.create)
 
+    .delete(dbController.delete)
 
 module.exports = router;
 

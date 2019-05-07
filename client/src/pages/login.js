@@ -19,6 +19,7 @@ import {
     Switch, 
     Redirect
 } from "react-router-dom";
+import swal from "sweetalert";
 
 //var md5 = require('md5');
 
@@ -39,39 +40,26 @@ class Login extends Component {
 
     handleLogin = (e) => {
         e.preventDefault();
-        const token = localStorage.getItem("token");
-        console.log('this is front end token: ', token);
+        //const token = localStorage.getItem("token");
+        //console.log('this is front end token: ', token);
         localStorage.removeItem("token");
-            // const response = await function() { 
-            //     fetch('/api/login', {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         }, 
-            //         body: JSON.stringify({
-            //             email: this.state.email,
-            //             password: this.state.password
-            //         })
-            //     });
-            // }
+            
             const loginData = { email: this.state.email, password: this.state.password };
-            console.log(loginData);
+            //console.log(loginData);
         axios.post('/api/login', loginData)
             .then(response => {
-                console.log('RESPONSE: ', response);
-                let backEndRes = response.data;
-                console.log("Back End Response", backEndRes);
-                
+                let backEndRes = response.data;             
                 if (backEndRes.message === "none") {
-                    alert("That email does not exist. If you don't have an Account, sign up!");
+                    swal("Sorry!", "If you don't have an Atlas account, sign up below", "error");
                 
                 }
                 else if (backEndRes.message === "Invalid Password/Username") {
-                    alert("Invalid email/password");
+                    swal("Invalid email/password combination", "Forgot password? Reset password below", "warning");
                 }
                 else{
-                    console.log("User is logged in")
                     localStorage.setItem("token", JSON.stringify(backEndRes.token));
+                    localStorage.setItem("pin", JSON.stringify(backEndRes.data.pin));
+                    localStorage.setItem("email", JSON.stringify(backEndRes.data.email));
                     console.log('login.js userId: ', backEndRes.userID);
                     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
                     this.setState({loggedIn: true});
@@ -79,7 +67,7 @@ class Login extends Component {
                 }  
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.status);
             })
     };
 
@@ -129,15 +117,15 @@ class Login extends Component {
                                     onChange={this.handleChange}
                                     type="password"
                                 />
-
+                                <p>Forgot your password? <a href="/forgot">Click here</a></p>
                                 <Button type="submit" color="blue" fluid size="large" onClick={this.handleLogin}>
                                     Login
                                 </Button>
                             </Form>
                         </Segment>
-                        <Message>
-                            Not registered yet? <a href="/signup">Sign Up</a>
-                        </Message>
+                        <Header as="h4" textAlign="center">
+                            Don't have an account yet? <a href="/signup">Sign Up</a>
+                        </Header>
                     </Grid.Column>
                     <Steps />
                 </Grid>
