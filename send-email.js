@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
+const dotenv = require("dotenv").config();
 
 
 const transport = nodemailer.createTransport(smtpTransport({
@@ -7,7 +8,7 @@ const transport = nodemailer.createTransport(smtpTransport({
     host: "smtp.gmail.com",
     auth: {
         user: 'atlas.alerts.info@gmail.com',
-        pass: 'atlas555',
+        pass: process.env.emailPassword,
     }
 }));
 
