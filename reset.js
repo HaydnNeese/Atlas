@@ -5,6 +5,7 @@ var crypto = require('crypto');
 var md5 = require('md5');
 var User = require('./models/User').User;
 var Modal = require('./models/Modal').Modal;
+const dotenv = require("dotenv").config();
 
 
 module.exports = function(app) {
@@ -44,25 +45,23 @@ module.exports = function(app) {
           },
           function(token, user, done) {
 
-            // console.log("THIS IS MY REQ.HEADERS EMAIL INFO>>>>>>", req.headers)
-
 
             const transport = nodemailer.createTransport(smtpTransport({
               service: "gmail",
               host: "smtp.gmail.com",
               auth: {
                   user: 'atlas.alerts.info@gmail.com',
-                  pass: 'atlas555',
+                  pass: process.env.emailPassword,
                     }
              })
             );
             var mailOptions = {
               to: user.email,
-              from: 'passwordreset@demo.com',
-              subject: 'Node.js Password Reset',
+              from: 'atlas.alerts.info@gmail.com',
+              subject: 'Atlas Password Reset',
               text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                 'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                'http://'+'localhost:3000' + '/reset/' + token + '\n\n' +
+                'http://'+'atlas-secure-info.herokuapp.com' + '/reset/' + token + '\n\n' +
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             transport.sendMail(mailOptions, (error, info) => {
