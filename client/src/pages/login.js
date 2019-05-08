@@ -5,19 +5,14 @@ import {
     Form, 
     Grid, 
     Image, 
-    Message, 
     Segment, 
     Container, 
     Header
 } from "semantic-ui-react";
 import Steps from "../components/Steps";
-import Home from "./home";
 import axios from "axios";
 import {
-    BrowserRouter as Router,
-    Route, 
-    Switch, 
-    Redirect
+    BrowserRouter as Redirect
 } from "react-router-dom";
 import swal from "sweetalert";
 
