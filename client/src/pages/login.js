@@ -11,9 +11,7 @@ import {
 } from "semantic-ui-react";
 import Steps from "../components/Steps";
 import axios from "axios";
-import {
-    BrowserRouter as Redirect
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import swal from "sweetalert";
 
 //var md5 = require('md5');
@@ -58,7 +56,7 @@ class Login extends Component {
                     console.log('login.js userId: ', backEndRes.userID);
                     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
                     this.setState({loggedIn: true});
-                    window.location.reload()
+                    // window.location.reload()
                 }  
             })
             .catch(err => {
@@ -67,13 +65,12 @@ class Login extends Component {
     };
 
     render() {
+        console.log(this.state.loggedIn)
         if (this.state.loggedIn) {
+            console.log("into the if")
             return(
                 <Redirect
-                    to={{
-                    pathname: "/home",
-                    //can pass more data here
-                    }}
+                        to="/home"
                 />
             );
         }
