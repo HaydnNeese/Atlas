@@ -7,9 +7,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-#button-div {
-  margin-top: 50px;
-}
+
 #delete-btn {
     background-color: #8ecbff;
 }
@@ -18,8 +16,7 @@
 }
 
 #lock-btn {
-  background-color: #8ecbff;
-  margin: auto;
+    background-color: #8ecbff;
 }
 
 #lock-btn:hover {
@@ -27,8 +24,9 @@
 }
 
 #submit-btn {
-  background-color: #bcff9d;
+    background-color: #bcff9d;
 }
+
 
 .btn-matrix { 
     width: 10rem;
@@ -68,10 +66,9 @@
   .btn.btn-dark.styled-btn:hover {
     background-color: #bcff9d;
   }
-<<<<<<< Updated upstream
-  
-=======
->>>>>>> Stashed changes
+
+  #reset-btn {
+  }
   #placeholder-line {
     font-size: 30px;
     margin: 5px;

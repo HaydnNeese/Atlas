@@ -5,12 +5,10 @@ var Modal = require('../models/Modal').Modal;
 module.exports = {
 
     findById: function(req, res) {
-        console.log(`THIS IS THE REQ PARAMS: : : ${req.params.id}`)
         User
             .findById(req.params.id)
             .populate("modals")
             .then(dbUser => { 
-                console.log(`THIS IS THE DBUSER!!!: ${dbUser}`);
                 res.json(dbUser);
             })
             .catch(err => res.status(422).json(err))
