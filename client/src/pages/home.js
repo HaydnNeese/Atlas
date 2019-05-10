@@ -178,76 +178,75 @@ class Home extends Component {
       })
   }
 //working on mapping the numpad
-  handleEventNumber = (event) => {
-    let key = event.keyCode;
-    switch (key) {
-      case 49 || 97:
-        this.setState({
-          value: 1
-        })
-        console.log(`clicked`)
-        break;
-      case 50 || 98:
-        this.setState({
-          value: 2
-        })
-        console.log(`clicked`)
-        break;
-      case 51 || 99:
-        this.setState({
-          value: 3
-        })
-        console.log(`clicked`)
-        break;
-      case 52 || 100:
-        this.setState({
-          value: 4
-        })
-        console.log(`clicked`)
-        break;
-      case 53 || 101:
-        this.setState({
-          value: 5
-        })
-        console.log(`clicked`)
-        break;
-      case 54 || 102:
-        this.setState({
-          value: 6
-        })
-        console.log(`clicked`)
-        break;
-      case 55 || 103:
-        this.setState({
-          value: 7
-        })
-        console.log(`clicked`)
-        break;
-      case 56 || 104:
-        this.setState({
-          value: 8
-        })
-        console.log(`clicked`)
-        break;
-      case 57 || 105:
-        this.setState({
-          value: 9
-        })
-        console.log(`clicked`)
-        break;
-      default: 
-        this.setState({
-          value: undefined
-        })
-        console.log(`clicked`)
-    }   
-    let number = this.state.value;
-    pinArray.push(number);
-    placeholderArray.push('*');
-    let placeholderString = placeholderArray.join('');
-    this.createPlaceHolder(placeholderString);
-  }
-
+  // handleEventNumber = (event) => {
+  //   let key = event.keyCode;
+  //   switch (key) {
+  //     case 49 || 97:
+  //       this.setState({
+  //         value: 1
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     case 50 || 98:
+  //       this.setState({
+  //         value: 2
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     case 51 || 99:
+  //       this.setState({
+  //         value: 3
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     case 52 || 100:
+  //       this.setState({
+  //         value: 4
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     case 53 || 101:
+  //       this.setState({
+  //         value: 5
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     case 54 || 102:
+  //       this.setState({
+  //         value: 6
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     case 55 || 103:
+  //       this.setState({
+  //         value: 7
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     case 56 || 104:
+  //       this.setState({
+  //         value: 8
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     case 57 || 105:
+  //       this.setState({
+  //         value: 9
+  //       })
+  //       console.log(`clicked`)
+  //       break;
+  //     default: 
+  //       this.setState({
+  //         value: undefined
+  //       })
+  //       console.log(`clicked`)
+  //   }   
+  //   let number = this.state.value;
+  //   pinArray.push(number);
+  //   placeholderArray.push('*');
+  //   let placeholderString = placeholderArray.join('');
+  //   this.createPlaceHolder(placeholderString);
+  // }
 
   render() {
     return (
@@ -278,7 +277,11 @@ class Home extends Component {
                 />
               </Grid.Column>
             </Grid.Row>
+<<<<<<< Updated upstream
             { this.state.modal.length > 0 ? ( 
+=======
+            {this.state.modal.length > 0 ? (
+>>>>>>> Stashed changes
               this.state.locked ? (
                   <Grid.Row stackable columns={3}>
                     {this.state.modal.map((card) => {
@@ -335,7 +338,10 @@ class Home extends Component {
                                     attempts={this.state.attempts}
                                     placeholder={this.state.placeholder}
                                     handlePinReset={this.resetPinArrays}
+<<<<<<< Updated upstream
                                     numPad={this.handleEventNumber}
+=======
+>>>>>>> Stashed changes
                                   />
                                 }
                                 {
