@@ -42,6 +42,10 @@
     padding: 10px;
   }
   
+  #button-div {
+    margin-top: 50px;
+  }
+
   .btn-matrix > .btn:first-child, .btn-matrix > .btn:last-child {
     border-radius: 25;
     padding: 10px;
