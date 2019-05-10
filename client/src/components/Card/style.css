@@ -25,8 +25,12 @@
 
 #submit-btn {
     background-color: #bcff9d;
+    font-size: 20px;
 }
 
+#reset-btn {
+  font-size: 20px;
+}
 
 .btn-matrix { 
     width: 12rem;
