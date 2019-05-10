@@ -42,7 +42,6 @@ export const SecurityCard = props => (
       <p id="placeholder-line">{props.placeholder}</p>
       <Form>
         <div id="pinpad" className="btn-group btn-matrix mb-3" >
-<<<<<<< Updated upstream
           <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="1">1</button>
           <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="2">2</button>
           <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="3">3</button>
@@ -57,17 +56,6 @@ export const SecurityCard = props => (
         <div id="button-div">
           <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
           <Button id="reset-btn" onClick={props.handlePinReset}>Reset</Button>
-=======
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-1" value="1">1</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-2" value="2">2</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-3" value="3">3</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-4" value="4">4</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-5" value="5">5</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-6" value="6">6</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-7" value="7">7</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-8" value="8">8</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" id="num-9" value="9">9</button>
->>>>>>> Stashed changes
         </div>
       </Form>
     </Card.Content>

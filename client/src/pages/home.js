@@ -277,11 +277,7 @@ class Home extends Component {
                 />
               </Grid.Column>
             </Grid.Row>
-<<<<<<< Updated upstream
             { this.state.modal.length > 0 ? ( 
-=======
-            {this.state.modal.length > 0 ? (
->>>>>>> Stashed changes
               this.state.locked ? (
                   <Grid.Row stackable columns={3}>
                     {this.state.modal.map((card) => {
@@ -338,10 +334,7 @@ class Home extends Component {
                                     attempts={this.state.attempts}
                                     placeholder={this.state.placeholder}
                                     handlePinReset={this.resetPinArrays}
-<<<<<<< Updated upstream
                                     numPad={this.handleEventNumber}
-=======
->>>>>>> Stashed changes
                                   />
                                 }
                                 {
