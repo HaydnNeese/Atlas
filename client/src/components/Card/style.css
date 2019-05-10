@@ -28,6 +28,31 @@
     font-size: 20px;
 }
 
+
+#locked-header {
+  font-size: 20px;
+}
+
+#locked-content {
+  font-size: 20px;
+}
+
+#security-header {
+  font-size: 20px;
+}
+
+#security-content {
+  font-size: 20px;
+}
+
+#note-header {
+  font-size: 20px;
+}
+
+#note-content {
+  font-size: 20px;
+}
+
 #reset-btn {
   font-size: 20px;
 }

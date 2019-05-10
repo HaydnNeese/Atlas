@@ -2,12 +2,13 @@ import React from 'react'
 import { Card, Image, Icon, Form, Button } from 'semantic-ui-react'
 import Style from "./style.css"
 //the card that will be shown after the security question is answered correctly
+
 export const PassCard = props => (
   <Card centered>
     <Card.Content>
-      <Card.Header className="card-header">{props.title}</Card.Header>
+      <Card.Header id="note-header" className="card-header">{props.title}</Card.Header>
       <Card.Meta className="card-center">
-        <span className='Gmail card' >{props.note}</span>
+        <span id="note-content" className='Gmail card' >{props.note}</span>
       </Card.Meta>
     </Card.Content >
     <Card.Content className="dark" extra>
@@ -21,8 +22,8 @@ export const PassCard = props => (
 //the card that will be shown on load based on the number of notes are saved to the user
 export const LockedCard = props => (
   <Card centered>
-    <Card.Content header={props.title} />
-    <Card.Content className="card-center" description="Click the lock to gain access" />
+    <Card.Content id="locked-header" header={props.title} />
+    <Card.Content id="locked-content" className="card-center" description="Click the lock to gain access" />
     <button id="lock-btn" className="ui primary button lock-button" onClick={props.handleLockButtonClick}><i className="fas fa-lock"></i></button>
     <Card.Content className="dark" extra>
       <Icon name='hide' />
@@ -33,8 +34,8 @@ export const LockedCard = props => (
 //need this to become a pin input
 export const SecurityCard = props => (
   <Card centered>
-    <Card.Content className="card-header" header={props.title} />
-    <Card.Content className="card-center">
+    <Card.Content id="security-header" className="card-header" header={props.title} />
+    <Card.Content id="security-content" className="card-center">
       <p>Click the buttons to enter a 6-digit PIN.</p>
       <p id="placeholder-line">{props.placeholder}</p>
       <Form>
