@@ -42,15 +42,20 @@ export const SecurityCard = props => (
       <p id="placeholder-line">{props.placeholder}</p>
       <Form>
         <div id="pinpad" className="btn-group btn-matrix mb-3" >
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="1">1</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="2">2</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="3">3</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="4">4</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="5">5</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="6">6</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="7">7</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="8">8</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="9">9</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="1">1</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="2">2</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="3">3</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="4">4</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="5">5</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="6">6</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="7">7</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="8">8</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="9">9</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="0">0</button>
+        </div>
+        <div id="button-div">
+          <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
+          <Button id="reset-btn" onClick={props.handlePinReset}>Reset</Button>
         </div>
 
         <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
