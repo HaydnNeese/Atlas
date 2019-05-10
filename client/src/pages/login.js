@@ -56,7 +56,7 @@ class Login extends Component {
                     console.log('login.js userId: ', backEndRes.userID);
                     localStorage.setItem("userId", JSON.stringify(backEndRes.userID));
                     this.setState({loggedIn: true});
-                    // window.location.reload()
+                    window.location.reload()
                 }  
             })
             .catch(err => {
