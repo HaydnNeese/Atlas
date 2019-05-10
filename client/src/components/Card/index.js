@@ -57,17 +57,22 @@ export const SecurityCard = props => (
           <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
           <Button id="reset-btn" onClick={props.handlePinReset}>Reset</Button>
         </div>
-
-        <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
-        <Button id="reset-btn" onClick={props.handlePinReset}>Reset</Button>
       </Form>
-    </Card.Content>
-    <Card.Content className="dark" extra>
-      <Icon name='question' />
     </Card.Content>
   </Card>
 )
 
+export const ExampleCard = props => (
+  <Card centered>
+    <Image src={props.image} max-width="250px" max-height="250px" />
+    <Card.Content>
+      <Card.Header className="card-header">{props.title}</Card.Header>
+      <Card.Meta className="card-center">
+        <span className='Gmail card' >{props.note}</span>
+      </Card.Meta>
+    </Card.Content >
+  </Card>
+)
 
 // display the card with the title showing but not the note, in place of the note show a lock
 // make the lock clickable and when you click on it reveal a 
