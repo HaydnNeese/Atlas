@@ -5,20 +5,13 @@ import {
     Form, 
     Grid, 
     Image, 
-    Message, 
     Segment, 
     Container, 
     Header
 } from "semantic-ui-react";
 import Steps from "../components/Steps";
-import Home from "./home";
 import axios from "axios";
-import {
-    BrowserRouter as Router,
-    Route, 
-    Switch, 
-    Redirect
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import swal from "sweetalert";
 
 //var md5 = require('md5');
@@ -72,13 +65,12 @@ class Login extends Component {
     };
 
     render() {
+        console.log(this.state.loggedIn)
         if (this.state.loggedIn) {
+            console.log("into the if")
             return(
                 <Redirect
-                    to={{
-                    pathname: "/home",
-                    //can pass more data here
-                    }}
+                        to="/home"
                 />
             );
         }
