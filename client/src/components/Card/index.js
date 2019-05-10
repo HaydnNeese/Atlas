@@ -42,27 +42,37 @@ export const SecurityCard = props => (
       <p id="placeholder-line">{props.placeholder}</p>
       <Form>
         <div id="pinpad" className="btn-group btn-matrix mb-3" >
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="1">1</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="2">2</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="3">3</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="4">4</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="5">5</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="6">6</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="7">7</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="8">8</button>
-          <button onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="9">9</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="1">1</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="2">2</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="3">3</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="4">4</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="5">5</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="6">6</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="7">7</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="8">8</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="9">9</button>
+          <button onKeyUp={props.numPad} onClick={props.handleAnswerInput} className="btn btn-dark styled-btn" value="0">0</button>
         </div>
-
-        <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
-        <Button id="reset-btn" onClick={props.handlePinReset}>Reset</Button>
+        <div id="button-div">
+          <Button id="submit-btn" onClick={props.handleAnswerSubmit}>Submit</Button>
+          <Button id="reset-btn" onClick={props.handlePinReset}>Reset</Button>
+        </div>
       </Form>
-    </Card.Content>
-    <Card.Content className="dark" extra>
-      <Icon name='question' />
     </Card.Content>
   </Card>
 )
 
+export const ExampleCard = props => (
+  <Card centered>
+    <Image src={props.image} max-width="250px" max-height="250px" />
+    <Card.Content>
+      <Card.Header className="card-header">{props.title}</Card.Header>
+      <Card.Meta className="card-center">
+        <span className='Gmail card' >{props.note}</span>
+      </Card.Meta>
+    </Card.Content >
+  </Card>
+)
 
 // display the card with the title showing but not the note, in place of the note show a lock
 // make the lock clickable and when you click on it reveal a 

@@ -14,5 +14,5 @@ export default {
         return axios.post("/api/passwordreset/" + token , data);
     }
 
-    //make an edit modal and delete modal thing
+    //make an edit modal route
 };

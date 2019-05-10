@@ -7,7 +7,9 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
+#button-div {
+  margin-top: 50px;
+}
 #delete-btn {
     background-color: #8ecbff;
 }
@@ -16,7 +18,8 @@
 }
 
 #lock-btn {
-    background-color: #8ecbff;
+  background-color: #8ecbff;
+  margin: auto;
 }
 
 #lock-btn:hover {
@@ -24,9 +27,8 @@
 }
 
 #submit-btn {
-    background-color: #bcff9d;
+  background-color: #bcff9d;
 }
-
 
 .btn-matrix { 
     width: 10rem;
@@ -66,9 +68,7 @@
   .btn.btn-dark.styled-btn:hover {
     background-color: #bcff9d;
   }
-
-  #reset-btn {
-  }
+  
   #placeholder-line {
     font-size: 30px;
     margin: 5px;
