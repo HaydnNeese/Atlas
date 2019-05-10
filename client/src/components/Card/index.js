@@ -4,7 +4,6 @@ import Style from "./style.css"
 //the card that will be shown after the security question is answered correctly
 export const PassCard = props => (
   <Card centered>
-    <Image src={props.image} max-width="250px" max-height="250px" />
     <Card.Content>
       <Card.Header className="card-header">{props.title}</Card.Header>
       <Card.Meta className="card-center">
@@ -22,7 +21,6 @@ export const PassCard = props => (
 //the card that will be shown on load based on the number of notes are saved to the user
 export const LockedCard = props => (
   <Card centered>
-    <Image className="card-header" src={props.image} />
     <Card.Content header={props.title} />
     <Card.Content className="card-center" description="Click the lock to gain access" />
     <button id="lock-btn" className="ui primary button lock-button" onClick={props.handleLockButtonClick}><i className="fas fa-lock"></i></button>
@@ -35,7 +33,6 @@ export const LockedCard = props => (
 //need this to become a pin input
 export const SecurityCard = props => (
   <Card centered>
-    <Image src={props.image} />
     <Card.Content className="card-header" header={props.title} />
     <Card.Content className="card-center">
       <p>Click the buttons to enter a 6-digit PIN.</p>
@@ -64,7 +61,6 @@ export const SecurityCard = props => (
 
 export const ExampleCard = props => (
   <Card centered>
-    <Image src={props.image} max-width="250px" max-height="250px" />
     <Card.Content>
       <Card.Header className="card-header">{props.title}</Card.Header>
       <Card.Meta className="card-center">
