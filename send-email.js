@@ -15,7 +15,7 @@ const transport = nodemailer.createTransport(smtpTransport({
 
 function sendEmail(to) {
     var date = moment.utc().format();
-    var local = moment.utc(date).local().format('YYYY-MM-DD [at] HH:mm:ss');
+    var local = moment.utc(date).local().format('YYYY-MM-DD [at] HH:mm:ss [CST]');
     const mailOptions = {
         from: 'atlas.alerts.info@gmail.com',
         to: to,
