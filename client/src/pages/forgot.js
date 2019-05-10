@@ -12,14 +12,7 @@ import {
     Header
 } from "semantic-ui-react";
 import Steps from "../components/Steps";
-import Home from "./home";
 import axios from "axios";
-import {
-    BrowserRouter as Router,
-    Route, 
-    Switch, 
-    Redirect
-} from "react-router-dom";
 
 const divStyle = {
     paddingTop: '90px',
