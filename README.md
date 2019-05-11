@@ -12,7 +12,7 @@ Atlas provides a worry-free way to store your sensitive info (e.g. password hint
 
 Using logins and passcodes to access your secrets, and email alerts when your secrets are accessed you'll never have to worry about your valuable private info being exposed.
 
-## How to use Google Book Search: :mag:
+## How to use Atlas :mag:
 
 1) Sign up to Atlas if you haven't already. Pick a memorable PIN, but please don't pick 123456 or something!
 
