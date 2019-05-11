@@ -37,10 +37,10 @@ MongoDB / Express.js / React.js / Node.js / Semantic-UI-react / Axios / Nodemail
 
 ### Enjoy Atlas! :v:
 
-[Haydn Neese](https://github.com/HaydnNeese)
+[Haydn Neese](https://github.com/HaydnNeese) - front-end logic & card design
 
-[Jimmy Stone](https://github.com/jstone074)
+[Jimmy Stone](https://github.com/jstone074) - database & account management
 
-[Don Wasinger](https://github.com/djwasing)
+[Don Wasinger](https://github.com/djwasing) - authentication & backend logic
 
-[Dylan Bonds](https://github.com/mangodyl)
+[Dylan Bonds](https://github.com/mangodyl) - front-end design & UI/UX
