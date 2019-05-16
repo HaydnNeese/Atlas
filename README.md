@@ -35,6 +35,8 @@ Here are all the things we used:
 
 MongoDB / Express.js / React.js / Node.js / Semantic-UI-react / Axios / Nodemailer / JSON Web Token / MD5 / Mongoose / Sweet Alerts
 
+![screenshot of Atlas](https://drive.google.com/file/d/1xuhS7c5FPUPx2N1eHJPFeygbVNH-4rJx/view?usp=sharing)
+
 ### Enjoy Atlas! :v:
 
 [Haydn Neese](https://github.com/HaydnNeese) - front-end logic & card design
